@@ -4,23 +4,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.oceanstyxx.pubdriver.R;
+import com.oceanstyxx.pubdriver.adapter.MainFragmentPagerAdapter;
 import com.oceanstyxx.pubdriver.helper.SQLiteHandler;
 import com.oceanstyxx.pubdriver.helper.SessionManager;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
 
-    private TextView txtName;
-    private TextView txtEmail;
-    private Button btnLogout;
+public class MainActivity extends AppCompatActivity {
 
     private SQLiteHandler db;
     private SessionManager session;
@@ -30,9 +32,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txtName = (TextView) findViewById(R.id.name);
-        txtEmail = (TextView) findViewById(R.id.email);
-        btnLogout = (Button) findViewById(R.id.btnLogout);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
+        // Get the ViewPager and set it's PagerAdapter so that it can display items
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setAdapter(new MainFragmentPagerAdapter(getSupportFragmentManager(),
+                MainActivity.this));
+
+        // Give the TabLayout the ViewPager
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
 
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
@@ -50,18 +61,6 @@ public class MainActivity extends AppCompatActivity {
         String name = user.get("name");
         String email = user.get("email");
 
-        // Displaying the user details on the screen
-        txtName.setText(name);
-        txtEmail.setText(email);
-
-        // Logout button click event
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                logoutUser();
-            }
-        });
     }
 
     /**
@@ -79,5 +78,25 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.actionmenu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_logout) {
+            logoutUser();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
 }

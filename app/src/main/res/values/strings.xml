@@ -27,5 +27,29 @@
     <string name="btn_sedan">SEDAN</string>
     <string name="btn_hatchback">HATCHBACK</string>
     <string name="btn_luxury">LUXURY</string>
+    <string name="booking_no">BOOKING NO : </string>
+    <string name="booking_from">FROM : </string>
+    <string name="booking_status">STATUS : </string>
+    <string name="brn_view_details">View Details</string>
+
+
+    <string name="imgdesc">imgdesc</string>
+    <string-array name="titles">
+        <item>Home</item>
+        <item>Tutorials</item>
+        <item>My Apps</item>
+        <item>OS Versions</item>
+        <item>Tools</item>
+        <item>About Us</item>
+    </string-array>
+
+    <array name="icons">
+        <item>@drawable/home</item>
+        <item>@drawable/tutorials</item>
+        <item>@drawable/app</item>
+        <item>@drawable/os</item>
+        <item>@drawable/tool</item>
+        <item>@drawable/about</item>
+    </array>
 
 </resources>

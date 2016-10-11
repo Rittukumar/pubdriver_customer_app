@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+
+
+    <TextView
+        android:id="@+id/bookingNumberTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorBlack"
+        android:text="@string/booking_no"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        />
+
+    <TextView
+        android:id="@+id/bookingNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:layout_toRightOf="@+id/bookingNumberTitle"
+        android:textSize="12sp"
+        android:paddingLeft="8dp"
+        />
+
+    <TextView
+        android:id="@+id/bookingFromTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorBlack"
+        android:text="@string/booking_from"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/bookingNumberTitle"
+        />
+
+    <TextView
+        android:id="@+id/bookingFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:layout_toRightOf="@+id/bookingFromTitle"
+        android:layout_below="@+id/bookingNumber"
+        android:textSize="12sp"
+        android:paddingLeft="8dp"
+        />
+
+    <TextView
+        android:id="@+id/bookingTitleStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorBlack"
+        android:text="@string/booking_status"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/bookingFromTitle"
+        />
+
+    <TextView
+        android:id="@+id/bookingStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:layout_toRightOf="@+id/bookingTitleStatus"
+        android:layout_below="@+id/bookingFrom"
+        android:textSize="12sp"
+        android:paddingLeft="8dp"
+        />
+
+    <TextView
+        android:id="@+id/bookingDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@+id/bookingTitleStatus"
+        android:textSize="12sp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        />
+
+    <TextView
+        android:id="@+id/bookingDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:textSize="12sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:paddingBottom="5dp"
+        />
+
+    <Button
+        android:text="@string/brn_view_details"
+        android:id="@+id/btnViewDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookingDate"
+        android:layout_alignParentRight="true"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:textSize="10sp"
+        android:background="@color/colorButton1"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        />
+
+    <TextView
+        android:id="@+id/bookingPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorText1"
+        android:textSize="16sp"
+        android:layout_below="@+id/btnViewDetails"
+        android:layout_alignParentRight="true"
+        android:textStyle="bold"
+        android:paddingTop="10dp"
+        />
+
+
+</RelativeLayout>

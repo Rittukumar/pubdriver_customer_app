@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.oceanstyxx.pubdriver.R;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         String email = user.get("email");
 
     }
+
 
     /**
      * Logging out the user. Will set isLoggedIn flag to false in shared

@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.oceanstyxx.pubdriver.R;
 import com.oceanstyxx.pubdriver.helper.SQLiteHandler;
 import com.oceanstyxx.pubdriver.helper.SessionManager;
+import com.oceanstyxx.pubdriver.utils.Const;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -158,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity {
                 manJson.put("password", password);
                 json.put("data",manJson);
 
-                String getResponse = post("http://52.220.4.248/adminportal/public/v1/customer/signup", json.toString());
+                String getResponse = post(Const.BASE_URL+"customer/signup", json.toString());
                 return getResponse;
             } catch (Exception e) {
                 this.exception = e;

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.oceanstyxx.pubdriver.AndroidHttpPostGetActivity;
 import com.oceanstyxx.pubdriver.R;
 import com.oceanstyxx.pubdriver.helper.SessionManager;
+import com.oceanstyxx.pubdriver.utils.Const;
 
 import org.json.JSONObject;
 
@@ -135,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                 manJson.put("password", password);
                 json.put("data",manJson);
 
-                String getResponse = post("http://52.220.4.248/adminportal/public/v1/customer/signin", json.toString());
+                String getResponse = post(Const.BASE_URL+"customer/signin", json.toString());
 
                 return getResponse;
             } catch (Exception e) {

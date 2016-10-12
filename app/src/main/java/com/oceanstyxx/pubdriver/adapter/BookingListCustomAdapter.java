@@ -1,11 +1,14 @@
 package com.oceanstyxx.pubdriver.adapter;
 
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.app.Fragment;import android.app.FragmentManager;
 import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +23,12 @@ import com.oceanstyxx.pubdriver.fragment.BookingDetailsFragment;
 import com.oceanstyxx.pubdriver.fragment.MainBookingListFragment;
 import com.oceanstyxx.pubdriver.model.BookingRowItem;
 import com.oceanstyxx.pubdriver.model.RowItem;
+import com.oceanstyxx.pubdriver.utils.Const;
 
 import java.util.List;
 
 import static android.R.attr.fragment;
+import static android.R.attr.targetActivity;
 
 /**
  * Created by mohsin on 11/10/16.
@@ -92,13 +97,19 @@ public class BookingListCustomAdapter extends BaseAdapter {
         btnViewDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment newFragment = new BookingDetailsFragment();
+                /*Fragment newFragment = new BookingDetailsFragment();
 
                 FragmentTransaction ft = bookingListFragment.getChildFragmentManager().beginTransaction();
                 ft.hide(bookingListFragment);
                 ft.commit();
                 ft.show(newFragment);
-                ft.commit();
+                ft.commit();*/
+
+                AlertDialog alertDialog = new AlertDialog.Builder(((Activity) context)).create(); //Read Update
+                alertDialog.setTitle("hi");
+                alertDialog.setMessage("this is my app");
+                alertDialog.show();  //<-- See This!
+
             }
         });
 

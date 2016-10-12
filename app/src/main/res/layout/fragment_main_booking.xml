@@ -15,7 +15,8 @@
         android:layout_centerHorizontal="true"
         android:textSize="30dp"
         android:textStyle="bold"
-        android:textColor="#04C1F9"/>
+        android:textColor="#04C1F9"
+        android:paddingBottom="10dp"/>
 
     <Spinner
         android:id="@+id/pubs_spinner"
@@ -24,7 +25,13 @@
         android:layout_below="@+id/textViewBookingTitle"
         android:layout_centerHorizontal="true"
         android:prompt="@string/pubs_spinner_prompt"
-        android:spinnerMode="dropdown"/>
+        android:spinnerMode="dropdown"
+        android:background="@drawable/spinnershape"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:layout_marginTop="30dp"/>
 
     <Spinner
         android:id="@+id/cartype_spinner"
@@ -32,7 +39,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/radioGroupTransmission"
         android:layout_centerHorizontal="true"
-        android:prompt="@string/cartype_spinner_prompt"/>
+        android:prompt="@string/cartype_spinner_prompt"
+        android:background="@drawable/spinnershape"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"/>
 
     <CheckBox
         android:id="@+id/checkBoxTermsConditions"
@@ -40,7 +52,10 @@
         android:layout_height="wrap_content"
         android:text="I agreed to accept the terms and conditions."
         android:layout_below="@+id/cartype_spinner"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:layout_marginTop="30dp"/>
 
 
 
@@ -52,6 +67,11 @@
         android:id="@+id/btnRequestForBooking"
         android:layout_below="@+id/checkBoxTermsConditions"
         android:layout_centerHorizontal="true"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:textStyle="bold"
         />
 
     <RadioGroup
@@ -62,25 +82,25 @@
         android:layout_below="@+id/pubs_spinner"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:text="MANUAL"
             android:id="@+id/radioButtonManual"
-            android:layout_gravity="center_horizontal"
             android:checked="false"
-            android:textSize="25dp" />
+            android:textSize="15dp"
+            />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="AUTOMATIC"
             android:id="@+id/radioButtonAutomatic"
-            android:layout_gravity="center_horizontal"
             android:checked="false"
-            android:textSize="25dp"
+            android:textSize="15dp"
             android:layout_weight="0.13" />
     </RadioGroup>
 

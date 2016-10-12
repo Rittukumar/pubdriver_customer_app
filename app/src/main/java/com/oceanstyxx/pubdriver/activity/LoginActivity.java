@@ -14,9 +14,11 @@ import android.widget.Toast;
 
 import com.oceanstyxx.pubdriver.AndroidHttpPostGetActivity;
 import com.oceanstyxx.pubdriver.R;
+import com.oceanstyxx.pubdriver.helper.SQLiteHandler;
 import com.oceanstyxx.pubdriver.helper.SessionManager;
 import com.oceanstyxx.pubdriver.utils.Const;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -44,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     MediaType JSON;
 
     private SessionManager session;
+    private SQLiteHandler db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,9 @@ public class LoginActivity extends AppCompatActivity {
 
         // Session manager
         session = new SessionManager(getApplicationContext());
+
+        // SQLite database handler
+        db = new SQLiteHandler(getApplicationContext());
 
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
@@ -148,11 +154,46 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String getResponse) {
 
             System.out.println(getResponse);
+            session.setLogin(true);
 
-            Intent i = new Intent(getApplicationContext(),
-                    MainActivity.class);
-            startActivity(i);
-            finish();
+            try {
+                JSONObject jObj = new JSONObject(getResponse);
+
+                String code = jObj.getString("code");
+                Log.d(TAG, "Register status: " + code);
+                //boolean error = jObj.getBoolean("error");
+                if (code.equals("200") ) {
+
+                    // User successfully stored in MySQL
+                    // Now store the user in sqlite
+                        String uid = "1111";//jObj.getString("uid");
+
+                        JSONObject user = jObj.getJSONObject("customer");
+                        String name = user.getString("name");
+                        String email = user.getString("email");
+                        String phone = user.getString("phone");
+                        String created_at = user
+                                .getString("created_at");
+
+                        // Inserting row in users table
+                        db.addUser(name, email, phone,uid, created_at);
+
+                    // Launch login activity
+                    Intent i = new Intent(getApplicationContext(),
+                            MainActivity.class);
+                    startActivity(i);
+                    finish();
+                } else {
+                    hideDialog();
+                    // Error occurred in registration. Get the error
+                    // message
+                    String errorMsg = jObj.getString("message");
+                    Toast.makeText(getApplicationContext(),
+                            errorMsg, Toast.LENGTH_LONG).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         private String post(String url, String json) throws IOException {

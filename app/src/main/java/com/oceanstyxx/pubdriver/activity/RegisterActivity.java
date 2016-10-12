@@ -170,6 +170,7 @@ public class RegisterActivity extends AppCompatActivity {
         protected void onPostExecute(String getResponse) {
             Log.d(TAG, "Register Response: " + getResponse);
             try {
+                session.setLogin(true);
                 JSONObject jObj = new JSONObject(getResponse);
 
                 String code = jObj.getString("code");

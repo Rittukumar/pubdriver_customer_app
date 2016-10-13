@@ -32,6 +32,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static android.R.attr.id;
+
 public class LoginActivity extends AppCompatActivity {
 
     // LogCat tag
@@ -169,6 +171,7 @@ public class LoginActivity extends AppCompatActivity {
                         String uid = "1111";//jObj.getString("uid");
 
                         JSONObject user = jObj.getJSONObject("customer");
+                        String customerId = user.getString("id");
                         String name = user.getString("name");
                         String email = user.getString("email");
                         String phone = user.getString("phone");
@@ -178,11 +181,13 @@ public class LoginActivity extends AppCompatActivity {
                         // Inserting row in users table
                         db.addUser(name, email, phone,uid, created_at);
 
-                    // Launch login activity
-                    Intent i = new Intent(getApplicationContext(),
-                            MainActivity.class);
-                    startActivity(i);
-                    finish();
+                        session.setKeyCustomerId(Integer.parseInt(customerId));
+
+                        // Launch login activity
+                        Intent i = new Intent(getApplicationContext(),
+                                MainActivity.class);
+                        startActivity(i);
+                        finish();
                 } else {
                     hideDialog();
                     // Error occurred in registration. Get the error

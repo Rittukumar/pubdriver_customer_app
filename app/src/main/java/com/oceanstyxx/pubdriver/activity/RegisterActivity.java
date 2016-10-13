@@ -180,9 +180,10 @@ public class RegisterActivity extends AppCompatActivity {
 
                     // User successfully stored in MySQL
                     // Now store the user in sqlite
-                    /*String uid = jObj.getString("uid");
+                    String uid = "1111";//jObj.getString("uid");
 
-                    JSONObject user = jObj.getJSONObject("user");
+                    JSONObject user = jObj.getJSONObject("customer");
+                    Integer id = Integer.parseInt(user.getString("id"));
                     String name = user.getString("name");
                     String email = user.getString("email");
                     String phone = user.getString("phone");
@@ -190,13 +191,16 @@ public class RegisterActivity extends AppCompatActivity {
                             .getString("created_at");
 
                     // Inserting row in users table
-                    db.addUser(name, email, phone,uid, created_at);*/
+                    db.addUser(name, email, phone,uid, created_at);
+                    session.setKeyCustomerId(id);
 
                     // Launch login activity
                     Intent i = new Intent(getApplicationContext(),
                             MainActivity.class);
                     startActivity(i);
                     finish();
+
+
                 } else {
                     hideDialog();
                     // Error occurred in registration. Get the error

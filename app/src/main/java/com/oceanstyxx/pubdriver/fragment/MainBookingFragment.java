@@ -28,6 +28,7 @@ import com.oceanstyxx.pubdriver.activity.MainActivity;
 import com.oceanstyxx.pubdriver.activity.RegisterActivity;
 import com.oceanstyxx.pubdriver.adapter.CarTypeSpinAdapter;
 import com.oceanstyxx.pubdriver.adapter.PubSpinAdapter;
+import com.oceanstyxx.pubdriver.helper.SessionManager;
 import com.oceanstyxx.pubdriver.model.CarType;
 import com.oceanstyxx.pubdriver.model.DriverRequest;
 import com.oceanstyxx.pubdriver.model.Pub;
@@ -77,6 +78,8 @@ public class MainBookingFragment extends Fragment {
 
     CheckBox checkBoxTermsConditions;
 
+    private SessionManager session;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,6 +89,8 @@ public class MainBookingFragment extends Fragment {
 
         client = new OkHttpClient();
         JSON = MediaType.parse("application/json; charset=utf-8");
+        // Session manager
+        session = new SessionManager(getActivity());
 
         checkBoxTermsConditions=(CheckBox)rootView.findViewById(R.id.checkBoxTermsConditions);
 
@@ -290,6 +295,9 @@ public class MainBookingFragment extends Fragment {
                 manJson.put("car_type_id", driverRequest.getCarTypeId());
                 manJson.put("terms_and_cond_accepted", driverRequest.getTermsAndConditions());
                 manJson.put("device_id", "0000000003");
+                Integer customerId = session.getCustomerId();
+                manJson.put("customer_id", customerId);
+
 
                 json.put("data",manJson);
 

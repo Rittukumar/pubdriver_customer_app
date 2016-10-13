@@ -28,6 +28,8 @@ public class SessionManager
 
     private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
 
+    private static final String KEY_CUSTOMER_ID = "CUSTOMER_ID";
+
     public SessionManager(Context context)
     {
         this._context = context;
@@ -48,5 +50,16 @@ public class SessionManager
     public boolean isLoggedIn()
     {
         return pref.getBoolean(KEY_IS_LOGGEDIN, false);
+    }
+
+    public void setKeyCustomerId(Integer id) {
+        editor.putInt(KEY_CUSTOMER_ID, id);
+
+        // commit changes
+        editor.commit();
+    }
+
+    public Integer getCustomerId(){
+        return pref.getInt(KEY_CUSTOMER_ID,0);
     }
 }

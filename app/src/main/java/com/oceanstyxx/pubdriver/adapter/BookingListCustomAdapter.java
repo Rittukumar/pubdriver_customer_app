@@ -39,12 +39,10 @@ public class BookingListCustomAdapter extends BaseAdapter {
     Context context;
     List<BookingRowItem> rowItem;
 
-    private MainBookingListFragment bookingListFragment;
 
-    public BookingListCustomAdapter(Context context, List<BookingRowItem> rowItem,MainBookingListFragment bookingListFragment) {
+    public BookingListCustomAdapter(Context context, List<BookingRowItem> rowItem) {
         this.context = context;
         this.rowItem = rowItem;
-        this.bookingListFragment = bookingListFragment;
 
     }
 
@@ -97,13 +95,6 @@ public class BookingListCustomAdapter extends BaseAdapter {
         btnViewDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Fragment newFragment = new BookingDetailsFragment();
-
-                FragmentTransaction ft = bookingListFragment.getChildFragmentManager().beginTransaction();
-                ft.hide(bookingListFragment);
-                ft.commit();
-                ft.show(newFragment);
-                ft.commit();*/
 
                 AlertDialog alertDialog = new AlertDialog.Builder(((Activity) context)).create(); //Read Update
                 alertDialog.setTitle("hi");

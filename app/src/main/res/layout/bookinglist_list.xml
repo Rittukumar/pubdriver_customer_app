@@ -13,7 +13,7 @@
         android:gravity="center_vertical"
         android:textColor="@color/colorBlack"
         android:text="@string/booking_no"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorBlack"
         android:layout_toRightOf="@+id/bookingNumberTitle"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:paddingLeft="8dp"
         />
 
@@ -36,7 +36,7 @@
         android:gravity="center_vertical"
         android:textColor="@color/colorBlack"
         android:text="@string/booking_from"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:layout_below="@+id/bookingNumberTitle"
         />
@@ -48,8 +48,19 @@
         android:textColor="@color/colorBlack"
         android:layout_toRightOf="@+id/bookingFromTitle"
         android:layout_below="@+id/bookingNumber"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:paddingLeft="8dp"
+        />
+
+    <TextView
+        android:id="@+id/bookingDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorText1"
+        android:layout_below="@+id/bookingFrom"
+        android:textSize="15sp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
         />
 
     <TextView
@@ -59,9 +70,9 @@
         android:gravity="center_vertical"
         android:textColor="@color/colorBlack"
         android:text="@string/booking_status"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:textStyle="bold"
-        android:layout_below="@+id/bookingFromTitle"
+        android:layout_below="@+id/bookingDescription"
         />
 
     <TextView
@@ -70,31 +81,39 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorBlack"
         android:layout_toRightOf="@+id/bookingTitleStatus"
-        android:layout_below="@+id/bookingFrom"
-        android:textSize="12sp"
+        android:layout_below="@+id/bookingDescription"
+        android:textSize="15sp"
         android:paddingLeft="8dp"
+        android:paddingTop="0dp"
         />
 
-    <TextView
-        android:id="@+id/bookingDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorBlack"
-        android:layout_below="@+id/bookingTitleStatus"
-        android:textSize="12sp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        />
+
 
     <TextView
         android:id="@+id/bookingDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorBlack"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:paddingBottom="5dp"
+        />
+
+
+
+    <TextView
+        android:id="@+id/bookingPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorText2"
+        android:textSize="17sp"
+        android:layout_below="@+id/bookingDescription"
+        android:layout_alignParentRight="true"
+        android:textStyle="bold"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
         />
 
     <Button
@@ -102,28 +121,16 @@
         android:id="@+id/btnViewDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bookingDate"
-        android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@+id/bookingPrice"
+        android:layout_below="@+id/bookingDescription"
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:textSize="10sp"
         android:background="@color/colorButton1"
         android:paddingRight="5dp"
-        android:paddingLeft="5dp"
+        android:paddingLeft="10dp"
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
-        />
-
-    <TextView
-        android:id="@+id/bookingPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorText1"
-        android:textSize="16sp"
-        android:layout_below="@+id/btnViewDetails"
-        android:layout_alignParentRight="true"
-        android:textStyle="bold"
-        android:paddingTop="10dp"
         />
 
 

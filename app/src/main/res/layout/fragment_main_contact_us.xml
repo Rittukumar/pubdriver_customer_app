@@ -4,10 +4,98 @@
     android:layout_height="match_parent"
     tools:context="com.oceanstyxx.pubdriver.fragment.MainContactUsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Contact US" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/RelativeLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+
+        <TableLayout
+            android:id="@+id/tableLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1" >
+
+                <Button
+                    android:id="@+id/btnCall"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:text="CALL"
+                    android:background="@drawable/button"
+                    android:layout_centerInParent="true"
+                    android:textSize="30dp"
+                    android:textColor="#fff"/>
+
+                <Button
+                    android:id="@+id/btnEmail"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:text="EMAIL"
+                    android:background="@drawable/button"
+                    android:layout_centerInParent="true"
+                    android:textSize="30dp"
+                    android:textColor="#fff"/>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1" >
+
+                <Button
+                    android:id="@+id/btnUsageGuide"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:text="USAGE GUIDE"
+                    android:background="@drawable/button"
+                    android:layout_centerInParent="true"
+                    android:textSize="30dp"
+                    android:textColor="#fff"/>
+
+                <Button
+                    android:id="@+id/btnPricing"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:text="PRICING"
+                    android:background="@drawable/button"
+                    android:layout_centerInParent="true"
+                    android:textSize="30dp"
+                    android:textColor="#fff"/>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow3"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1" >
+
+                <Button
+                    android:id="@+id/btnTermsAndConditoins"
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:text="TERMS AND CONDITIONS"
+                    android:background="@drawable/button"
+                    android:layout_centerInParent="true"
+                    android:textSize="30dp"
+                    android:textColor="#fff"/>
+
+
+            </TableRow>
+        </TableLayout>
+
+    </RelativeLayout>
 
 </FrameLayout>

@@ -8,7 +8,9 @@ public class Pub {
 
     private Integer id;
 
-    private String pubName;
+    private String pub_name;
+
+    private String address;
 
     public Integer getId() {
         return id;
@@ -18,13 +20,21 @@ public class Pub {
         this.id = id;
     }
 
-    public String getPubName() {
-        return pubName;
+
+    public String getAddress() {
+        return address;
     }
 
-    public void setPubName(String pubName) {
-        this.pubName = pubName;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
+    public String getPub_name() {
+        return pub_name;
+    }
+
+    public void setPub_name(String pub_name) {
+        this.pub_name = pub_name;
+    }
 
 }

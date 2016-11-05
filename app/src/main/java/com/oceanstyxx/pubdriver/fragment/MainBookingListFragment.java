@@ -184,7 +184,10 @@ public class MainBookingListFragment extends ListFragment  {
 
                         bookingItem.setBookingStatus(bookingStatus);
                         bookingItem.setBookingDate(jObjBookingStatus.getString("booking_date_time"));
-                        bookingItem.setPrice("RS. 400");
+                        String totalPrice = jObjBookingStatus.getString("total_drive_rate");
+                        if(!totalPrice.equals("null")) {
+                            bookingItem.setPrice("RS. "+totalPrice);
+                        }
 
                         JSONObject jObjPub = new JSONObject(jObjBookingStatus.getString("pub"));
                         String pubAddress = jObjPub.getString("address");

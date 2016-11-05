@@ -30,6 +30,8 @@ public class SessionManager
 
     private static final String KEY_CUSTOMER_ID = "CUSTOMER_ID";
 
+    private static final String KEY_DRIVER_ID = "DRIVER_ID";
+
     public SessionManager(Context context)
     {
         this._context = context;
@@ -62,4 +64,16 @@ public class SessionManager
     public Integer getCustomerId(){
         return pref.getInt(KEY_CUSTOMER_ID,0);
     }
+
+    public void setKeyDriverId(String driverId) {
+        editor.putString(KEY_DRIVER_ID, driverId);
+
+        // commit changes
+        editor.commit();
+    }
+
+    public String getDriverId(){
+        return pref.getString(KEY_DRIVER_ID,"");
+    }
+
 }

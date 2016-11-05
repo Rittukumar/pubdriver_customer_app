@@ -59,20 +59,15 @@
         android:buttonTint="@color/colorText1"/>
 
 
-
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/CustomButtonStyle"
-        android:text="@string/btn_request_for_booking"
         android:id="@+id/btnRequestForBooking"
-        android:layout_below="@+id/checkBoxTermsConditions"
-        android:layout_centerHorizontal="true"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingRight="5dp"
-        android:paddingLeft="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_request_for_booking"
+        android:textSize="25dp"
         android:textStyle="bold"
+        android:background="@drawable/my_button_bg"
+        android:layout_below="@+id/checkBoxTermsConditions"
         />
 
     <RadioGroup

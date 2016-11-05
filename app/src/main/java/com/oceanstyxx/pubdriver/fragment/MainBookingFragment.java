@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -248,13 +249,13 @@ public class MainBookingFragment extends Fragment {
                     JSONObject jObj = new JSONObject(jsonArray.getString(i));
                     Pub pub = new Pub();
                     pub.setId(jObj.getInt("id"));
-                    pub.setPubName(jObj.getString("pub_name"));
+                    pub.setPub_name(jObj.getString("pub_name"));
                     pubs[i] = pub ;
                 }
 
                 Pub defaultPub = new Pub();
                 defaultPub.setId(0);
-                defaultPub.setPubName("Select The Pub");
+                defaultPub.setPub_name("Select The Pub");
                 pubs[jsonArray.length()-1] = defaultPub ;
 
 
@@ -336,6 +337,10 @@ public class MainBookingFragment extends Fragment {
                     // Launch login activity
                     Toast.makeText(getActivity(),
                             "Driver Request added", Toast.LENGTH_LONG).show();
+
+                    TabLayout tabhost = (TabLayout) getActivity().findViewById(R.id.sliding_tabs);
+                    tabhost.getTabAt(2).select();
+
                 } else {
                     //hideDialog();
                     // Error occurred in registration. Get the error

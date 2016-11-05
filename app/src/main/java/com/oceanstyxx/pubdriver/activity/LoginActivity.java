@@ -33,6 +33,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static android.R.attr.id;
+import static com.oceanstyxx.pubdriver.R.id.btnLinkToForgotScreen;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
     private Button btnLogin;
     private Button btnLinkToRegister;
+    private Button btnLinkToForgotScreen;
     private EditText inputEmail;
     private EditText inputPassword;
     private ProgressDialog pDialog;
@@ -62,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         inputPassword = (EditText) findViewById(R.id.password);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
+        btnLinkToForgotScreen = (Button) findViewById(R.id.btnLinkToForgotScreen);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -109,6 +112,18 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),
                         RegisterActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+
+        // Link to Forgot Password Screen
+        btnLinkToForgotScreen.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),
+                        ForgotPasswordActivity.class);
                 startActivity(i);
                 finish();
             }

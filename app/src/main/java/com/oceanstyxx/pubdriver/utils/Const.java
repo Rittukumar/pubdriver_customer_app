@@ -7,4 +7,6 @@ package com.oceanstyxx.pubdriver.utils;
 public class Const {
 
     public static final String BASE_URL="http://52.220.4.248/adminportal/public/v1/";
+
+    public static final String IMAGE_URL="http://52.220.4.248/adminportal/public/images/";
 }

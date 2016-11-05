@@ -14,7 +14,7 @@
             android:name=".AndroidHttpPostGetActivity"
             android:label="@string/app_name" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.SplashScreen"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -29,7 +29,10 @@
         <activity
             android:name=".activity.RegisterActivity"
             android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.BookingDetailsActivity" />
+        <activity android:name=".activity.ForgotPasswordActivity" />
+        <activity android:name=".activity.LoginActivity"></activity>
     </application>
 
 </manifest>

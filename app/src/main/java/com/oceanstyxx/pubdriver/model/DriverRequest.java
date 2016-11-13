@@ -1,5 +1,10 @@
 package com.oceanstyxx.pubdriver.model;
 
+import android.view.View;
+
+import static com.oceanstyxx.pubdriver.R.id.pickupaddress;
+import static com.oceanstyxx.pubdriver.R.id.pickupvenue;
+
 /**
  * Created by mohsin on 10/10/16.
  */
@@ -17,6 +22,12 @@ public class DriverRequest {
     private Integer transmissionId;
 
     private Integer carTypeId;
+
+    private String pickupvenue;
+
+    private String pickupaddress;
+
+    private String orderSrc;
 
 
     public Integer getId() {
@@ -65,5 +76,29 @@ public class DriverRequest {
 
     public void setCarTypeId(Integer carTypeId) {
         this.carTypeId = carTypeId;
+    }
+
+    public String getPickupvenue() {
+        return pickupvenue;
+    }
+
+    public void setPickupvenue(String pickupvenue) {
+        this.pickupvenue = pickupvenue;
+    }
+
+    public String getPickupaddress() {
+        return pickupaddress;
+    }
+
+    public void setPickupaddress(String pickupaddress) {
+        this.pickupaddress = pickupaddress;
+    }
+
+    public String getOrderSrc() {
+        return orderSrc;
+    }
+
+    public void setOrderSrc(String orderSrc) {
+        this.orderSrc = orderSrc;
     }
 }

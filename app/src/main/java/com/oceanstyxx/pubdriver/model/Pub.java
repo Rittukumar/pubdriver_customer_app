@@ -37,4 +37,9 @@ public class Pub {
         this.pub_name = pub_name;
     }
 
+    @Override
+    public String toString() {
+        return this.pub_name;
+    }
+
 }

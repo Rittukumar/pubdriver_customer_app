@@ -173,7 +173,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
                 JSONArray jsonArray =  new JSONArray(getResponse);
 
                 for (int i=0; i<jsonArray.length(); i++) {
-                    JSONObject jObj = new JSONObject(jsonArray.getString(i));
+                    //JSONObject jObj = new JSONObject(jsonArray.getString(i));
                     BookingStatus bookingStatus = new Gson().fromJson(jsonArray.getString(i), BookingStatus.class);
 
                     textViewBookingDate.setText(bookingStatus.getBooking_date_time());

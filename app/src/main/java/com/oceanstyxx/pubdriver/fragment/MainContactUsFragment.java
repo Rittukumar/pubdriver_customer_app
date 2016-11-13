@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.app.AlertDialog;
 import com.oceanstyxx.pubdriver.R;
 import android.support.v4.app.FragmentManager;
+import android.widget.TextView;
 
 import static com.oceanstyxx.pubdriver.R.id.btnRequestForBooking;
 
@@ -41,9 +42,15 @@ public class MainContactUsFragment extends Fragment {
         btnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                final View recipientsLayout = getActivity().getLayoutInflater().inflate(R.layout.message_scrollview, null);
+                final TextView recipientsTextView = (TextView) recipientsLayout.findViewById(R.id.invalid_recipients);
+                recipientsTextView.setText(R.string.call_paragraphs);
+                builder.setView(recipientsLayout);
                 builder.setTitle("CALL")
-                        .setMessage("This is call dialog")
+                        //.setMessage("This is USAGE GUIDE dialog")
                         .setCancelable(false)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -52,6 +59,7 @@ public class MainContactUsFragment extends Fragment {
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
+
             }
         });
 
@@ -59,9 +67,15 @@ public class MainContactUsFragment extends Fragment {
         btnEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                final View recipientsLayout = getActivity().getLayoutInflater().inflate(R.layout.message_scrollview, null);
+                final TextView recipientsTextView = (TextView) recipientsLayout.findViewById(R.id.invalid_recipients);
+                recipientsTextView.setText(R.string.email_paragraphs);
+                builder.setView(recipientsLayout);
                 builder.setTitle("EMAIL")
-                        .setMessage("This is EMAIL dialog")
+                        //.setMessage("This is USAGE GUIDE dialog")
                         .setCancelable(false)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -70,15 +84,22 @@ public class MainContactUsFragment extends Fragment {
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
+
             }
         });
 
         btnUsageGuide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                final View recipientsLayout = getActivity().getLayoutInflater().inflate(R.layout.message_scrollview, null);
+                final TextView recipientsTextView = (TextView) recipientsLayout.findViewById(R.id.invalid_recipients);
+                recipientsTextView.setText(R.string.user_manual_paragraphs);
+                builder.setView(recipientsLayout);
                 builder.setTitle("USAGE GUIDE")
-                        .setMessage("This is USAGE GUIDE dialog")
+                        //.setMessage("This is USAGE GUIDE dialog")
                         .setCancelable(false)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -87,6 +108,7 @@ public class MainContactUsFragment extends Fragment {
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
+
             }
         });
 
@@ -94,8 +116,13 @@ public class MainContactUsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                final View recipientsLayout = getActivity().getLayoutInflater().inflate(R.layout.message_scrollview, null);
+                final TextView recipientsTextView = (TextView) recipientsLayout.findViewById(R.id.invalid_recipients);
+                recipientsTextView.setText(R.string.pricing_paragraphs);
+                builder.setView(recipientsLayout);
                 builder.setTitle("PRICING")
-                        .setMessage("This is Pricing dialog")
+                        //.setMessage("This is USAGE GUIDE dialog")
                         .setCancelable(false)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -104,15 +131,22 @@ public class MainContactUsFragment extends Fragment {
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
+
             }
         });
 
         btnTermsAndConditoins.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                final View recipientsLayout = getActivity().getLayoutInflater().inflate(R.layout.message_scrollview, null);
+                final TextView recipientsTextView = (TextView) recipientsLayout.findViewById(R.id.invalid_recipients);
+                recipientsTextView.setText(R.string.terms_and_conditions_paragraphs);
+                builder.setView(recipientsLayout);
                 builder.setTitle("TERMS AND CONDITIONS")
-                        .setMessage("This is TERMS AND CONDITIONS dialog")
+                        //.setMessage("This is USAGE GUIDE dialog")
                         .setCancelable(false)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -121,6 +155,7 @@ public class MainContactUsFragment extends Fragment {
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
+
             }
         });
 

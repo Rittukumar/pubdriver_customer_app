@@ -122,11 +122,11 @@ public class MainBookingListFragment extends ListFragment  {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(getActivity());
+            /*pDialog = new ProgressDialog(getActivity());
             pDialog.setMessage("Loading Pubs List");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
-            pDialog.show();
+            pDialog.show();*/
         }
 
         protected String doInBackground(Void... params) {
@@ -189,9 +189,18 @@ public class MainBookingListFragment extends ListFragment  {
                             bookingItem.setPrice("RS. "+totalPrice);
                         }
 
-                        JSONObject jObjPub = new JSONObject(jObjBookingStatus.getString("pub"));
-                        String pubAddress = jObjPub.getString("address");
-                        bookingItem.setBookingFrom(pubAddress);
+
+                        String pickUpSrc = jObjBookingStatus.getString("pickup_src");
+
+                        if(pickUpSrc.equalsIgnoreCase("Pub")) {
+                            JSONObject jObjPub = new JSONObject(jObjBookingStatus.getString("pub"));
+                            String pubAddress = jObjPub.getString("address");
+                            bookingItem.setBookingFrom(pubAddress);
+                        }
+                        else {
+                            String pickUpAddress = "test";
+                            bookingItem.setBookingFrom(pickUpAddress);
+                        }
                         rowItems.add(bookingItem);
 
                     }
@@ -199,7 +208,7 @@ public class MainBookingListFragment extends ListFragment  {
                     adapter = new BookingListCustomAdapter(getActivity(), rowItems);
                     setListAdapter(adapter);
 
-                    pDialog.dismiss();
+                    //pDialog.dismiss();
                 }
             }
             catch(Exception e ){

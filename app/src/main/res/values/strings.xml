@@ -18,6 +18,7 @@
     <string name="title_activity_register">RegisterActivity</string>
     <string name="pubs_spinner_prompt">Select Pubs</string>
     <string name="cartype_spinner_prompt">Select Car Type</string>
+    <string name="title_transmission">Select Transmission</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -65,5 +66,159 @@
         <item>@drawable/tool</item>
         <item>@drawable/about</item>
     </array>
+
+    <string name="user_manual_paragraphs">
+        \n<b>STEP - 1</b>\n\n
+1. Sign up with your name, email id and phone number and become a member of pubdrivers.\n
+
+2. Once you sign up, you will be automatically login to your account.\n
+
+3. For the next time you can use the registered email id or phone number as the user name with the password to log in to your account.\n
+
+4. If you forgot your password, you can request to reset by clicking in forgot password link.\n\n
+
+<b>STEP - 2</b>\n\n
+1. Once you login, you can book a driver by clicking on Book Driver link from left navigation menu.\n
+
+2. Select the below options:\n
+
+a. Pub Name\n
+b. Transmission type of your car. We need to know whether your car is automatic gear or manual gear. We need to know this information while booking, so that we can filter and get you the best driver for your service.\n
+c. Type of your car. We need to know the type of your car like whether it is hatchback or sedan or suv or mpl or luxury. We need to know this information while booking, so that we can filter and get you the best driver for your service.\n
+d. aggree to the terms and condition by checking the checkbox.\n
+
+3. Click on the button named "Book a Driver".\n
+
+4. By this the request will be sent to pubdrivers and you will be getting a booking reference number.\n\n
+
+<b>STEP - 3</b>\n\n
+1. Now you can track the booking from the booking list menu. You can see the history of your booking here. The last booking record will be listed at the top.\n
+
+2. Driver will be assinged to your request within five minutes of your booking. Once the driver is assiged, you can see the driver details on cliking the view detail button.\n
+
+3. Driver will contact you or you can contact the driver if you need any clarification.\n\n
+
+<b>STEP - 4</b>\n\n
+1. Driver will come to the venue from were you booked. You can handover the car key to the driver.\n
+
+2. Driver might ask you few clarification to get to know the condition of the car. So that he can drive accordingly.\n
+
+3. The trip time starts when the driver trigger start from the driver app. You can monitor the live status from your booking detail page.\n\n
+
+<b>STEP - 5</b>\n\n
+1. When you reach the destination the driver triggers the end trip from the driver app.\n
+
+2. Now the total trip charge will be generated. You can see the status and price break ups from the details page.\n
+
+3. The soft copy of the bill will be send to your registed email id.\n
+
+4. You can settle the amount by cash.\n
+
+5. By this the trip ends.\n\n
+    </string>
+
+    <string name="terms_and_conditions_paragraphs">\n
+        1. By making a booking with us, you agree to be legally bound by these terms and conditions as they may be modified and posted on our web site from time to time.\n
+
+2. Please do not insist or encourage the driver to over speed or driving on a wrong lane.\n
+
+3. We strictly recommend our customers to not to leave cash, valuables in the possession of drivers.\n
+
+4. Management and its staff do not hold any responsibility for loss, damage and in case of any accident of your vehicle or the occupant’s life.\n
+
+5. Management is not responsible in case of any incidents if you hire a driver directly without office intimation.\n
+
+6. If the driver demand excess amount on our charges we request our customers to call us immediately.\n
+
+7. Insist the driver every time to show the company ID card and start the trip.\n
+
+8. The conduct of the driver shall not be directly responsibility of the company. However we encourage our customers to report to us the same.\n
+
+9. We are not responsible for any kind of damage or loss of your vehicle in case of a casualty/accident.\n
+
+10. If the driver drives in a rash and negligent manner or speaks in a rude manner you may report to us immediately.\n
+
+11. Car will be chauffeur driven and strictly not for self drive.\n
+
+12. For Car rentals (with driver), minimum 250 km/day and 300 Rs driver bata.\n
+
+13. Pubdrivers drivers will wait no more than 15 minutes from the requested trip start time, before they start the trip timer.\n
+
+14. Rs.199/- will be charged against the cancellation when the driver reports your place.\n
+
+15. Parking fees, toll, Interstate permit charges will be extra as per actual.\n
+
+16. The courts of Bangalore (Karnataka) shall have the sole and exclusive jurisdiction in respect of any matters arising from use of the of services offered by the company or agreement / arrangement between the company and the customer.\n
+
+17. Without prejudice to the foregoing, and insofar as allowed under mandatory applicable law, Pubdrivers aggregate liability shall in no event exceed the equivalent of the amount for the payment of the Services.\n
+
+18. The quality of the Services requested through the use of the Application is entirely the responsibility of the Driver who ultimately provides such transportation services to you. Pubdrivers under no circumstance accepts liability in connection with and/or arising from the Services provided by the Driver or any acts, actions, behavior, conduct, and/or negligence on the part of the Driver.\n
+
+19. We have taken all reasonable steps to prevent internet fraud and ensure any data collected from you is stored as securely and safely as possible. However, we shall not be held liable in the unlikely event of a breach in our secure computer servers or those of third parties other than as required under applicable law.\n
+
+20. Pubdrivers does not represent or endorse the accuracy or reliability of any information, or advertisements (collectively, the "Content") contained on, distributed through, or linked, downloaded or accessed from or contained on the Website/Application, or the quality of any products, information or other materials displayed, or obtained by you as a result of an advertisement or any other information or offer in or in connection with the Service.\n
+
+21. Offers are subject to Pubdrivers discretion and may be withdrawn at any time and without notice. Pubdrivers is the sole owner or lawful licensee of all the rights to the Website/Application and its content. Website/Application content means its design, layout, text, images, graphics, sound, video etc. The Website/Application content embodies trade secrets and intellectual property rights protected under worldwide copyright and other laws. All title, ownership and intellectual property rights in the Website/Application and its content shall remain with Pubdrivers.\n
+
+22. All rights not otherwise claimed under this Agreement or in the Website /Application, are hereby reserved. The information contained in this Website/Application is intended, solely to provide general information for the personal use of the reader, who accepts full responsibility for its use.\n
+
+23. You may access the Website/Application, avail of the features, facilities and Services for your personal or internal requirements only. You are not entitled to duplicate, distribute, create derivative works of, display, or commercially exploit the Website/Application Content, features or facilities, directly or indirectly, without our prior written permission of Pubdrivers.\n
+
+24. Pubdrivers reserves the right to deny access to particular Users to any/all of its Services without any prior notice/explanation in order to protect the interests of Pubdrivers and/or other Users to the Website/Application. Pubdrivers reserves the right to limit, deny or create different access to the Website/Application and its features with respect to different Users.\n
+
+25. We reserve the right to terminate your account or your access to the Website/Application immediately, with or without notice to you, and without liability: (i) if you have violated any of the Terms of Use; (ii) if you have furnished us with false or misleading information; (iii) pursuant to requests by law enforcement or other government agencies; (iv) in case of unexpected technical or security issues or problems; (v) in case of discontinuance or material modification to the Services (or any part thereof); and / or (vi) in case of interference with use of our Website/Application by others.\n
+
+26. In the event of termination by you or us, your account will be disabled and you will not be granted access to your account or any information or content contained in your account. You will not and not attempt to create another account for accessing and using the Website/Application without the written consent of Pubdrivers.\n
+
+27. This Terms of Use shall remain in full force and effect while you have an account with us. Even after termination of your account with us, certain provisions of this Terms of Use will remain in effect, including but not limited to, Intellectual Property Rights, Prohibited Uses and Indemnification. You agree that we will not be liable to you or any third party for taking any of these actions.\n
+
+28. Notwithstanding the termination of this Agreement, you shall continue to be bound by the terms of this Agreement in respect of your prior use of this Website/Application and all matters connected with, relating to or arising from such use.\n
+
+29. You agree, understand and confirm that the credit card details provided by you for registering as this Website/ Application will be correct and accurate and you shall not use the credit card which is not lawfully owned by you. You further agree and undertake to provide the correct and valid credit card details to us. Further, the said information will not be utilized and shared by us with any of the third parties unless required by law, regulation or court order.\n
+
+30. You are prohibited from violating or attempting to violate any security features of any of our Website/ Application, including, without limitation:\n
+
+        (a) accessing content or data not intended for you, or logging onto a server or account that you are not authorized to access;\n
+
+(b) attempting to probe, scan, or test the vulnerability of any of our Website/ Application or any associated services, system or network, or to breach security or authentication measures without proper authorization;\n
+
+(c) using any automated process or service (such as, by way of example only, any spider, robot, or automated searching or "scraping" tool) to monitor, access or copy any content from any Website/Application;\n
+
+(d) interfering or attempting to interfere with service to any user, host, or network, including, without limitation, by means of submitting a virus to the Website/Application, overloading, initiating or facilitating any "denial of service" attack, "flooding," "spamming," "mail bombing," or "crashing;"\n
+
+(e) using any our Website/ Application or servers to send unsolicited e-mail, including, without limitation, promotions, or advertisements for products or services;\n
+
+(f) forging any TCP/IP packet header or any part of the header information in any e-mail or in any posting using any our Website/ Application; or\n
+
+(g) attempting to modify, reverse-engineer, decompile, disassemble, or otherwise reduce or attempt to reduce to a human-perceivable form any of the/n source code used by Pubdrivers in providing the Website/ Application or our Services. Any violation of system or network security may subject you to civil and/or criminal liability, and will result in a loss of your ability to access and use the Website/Application.\n
+    </string>
+
+    <string name="pricing_paragraphs">
+        <b>Peak Hours</b>\n
+Morning 07:00 AM to 10:00 AM\n
+Evening 05:00 PM to 09:00 PM\n
+For the ride starting between these time will be:\n\n
+First Hour	 150\n
+Every minute after first hour	 3\n\n
+<b>Normal Hours</b>\n
+Morning 10:00 AM to 05:00 PM\n
+For the ride starting between these time will be:\n\n
+First Hour	 100\n
+Every minute after first hour	 2.5\n\n
+<b>Night Hours</b>\n
+Morning 09:00 PM to 07:00 AM\n
+For the ride starting between these time will be:\n\n
+First Hour	 250\n
+Every minute after first hour	 4\n
+        </string>
+
+    <string name="call_paragraphs">
+        9742411516,9886483946
+    </string>
+
+    <string name="email_paragraphs">
+        contactus@pubdrivers.com
+    </string>
+
 
 </resources>

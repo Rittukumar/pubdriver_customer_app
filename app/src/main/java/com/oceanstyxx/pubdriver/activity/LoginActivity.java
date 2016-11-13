@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText inputEmail;
     private EditText inputPassword;
     private ProgressDialog pDialog;
+    private CheckBox checkBoxRemember;
 
     OkHttpClient client;
     MediaType JSON;
@@ -65,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
         btnLinkToForgotScreen = (Button) findViewById(R.id.btnLinkToForgotScreen);
+        checkBoxRemember = (CheckBox) findViewById(R.id.checkBoxRemember);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
@@ -75,6 +78,14 @@ public class LoginActivity extends AppCompatActivity {
 
         // SQLite database handler
         db = new SQLiteHandler(getApplicationContext());
+
+        if (session.isLoggedInRemember()) {
+            checkBoxRemember.setChecked(true);
+        }
+        else {
+            checkBoxRemember.setChecked(true);
+        }
+
 
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
@@ -197,6 +208,13 @@ public class LoginActivity extends AppCompatActivity {
                         db.addUser(name, email, phone,uid, created_at);
 
                         session.setKeyCustomerId(Integer.parseInt(customerId));
+
+                        if(checkBoxRemember.isChecked()) {
+                            session.setLoginRemember(true);
+                        }
+                        else {
+                            session.setLoginRemember(false);
+                        }
 
                         // Launch login activity
                         Intent i = new Intent(getApplicationContext(),

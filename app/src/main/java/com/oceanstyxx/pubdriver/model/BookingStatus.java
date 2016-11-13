@@ -1,5 +1,7 @@
 package com.oceanstyxx.pubdriver.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by mohsin on 27/10/16.
  */
@@ -30,7 +32,9 @@ public class BookingStatus {
 
     private Pub pub;
 
-    private Billing billing;
+    private ArrayList<Billing> billing;
+
+    private Customer customer;
 
     public Integer getDriver_id() {
         return driver_id;
@@ -128,11 +132,19 @@ public class BookingStatus {
         this.pub = pub;
     }
 
-    public Billing getBilling() {
+    public ArrayList getBilling() {
         return billing;
     }
 
-    public void setBilling(Billing billing) {
+    public void setBilling(ArrayList billing) {
         this.billing = billing;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

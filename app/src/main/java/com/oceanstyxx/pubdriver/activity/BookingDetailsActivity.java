@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.oceanstyxx.pubdriver.R;
 import com.oceanstyxx.pubdriver.helper.SessionManager;
+import com.oceanstyxx.pubdriver.model.Billing;
 import com.oceanstyxx.pubdriver.model.BookingStatus;
 import com.oceanstyxx.pubdriver.model.InvoiceData;
 import com.oceanstyxx.pubdriver.model.Invoices;
@@ -45,7 +46,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -58,6 +63,8 @@ import static com.oceanstyxx.pubdriver.R.id.bookingFromPub;
 import static com.oceanstyxx.pubdriver.R.id.bookingFromPubTitle;
 import static com.oceanstyxx.pubdriver.R.id.bookingNumber;
 import static com.oceanstyxx.pubdriver.R.id.bookingStartTime;
+import static com.oceanstyxx.pubdriver.R.id.bookingStatus;
+import static com.oceanstyxx.pubdriver.R.id.bookingTotal;
 import static com.oceanstyxx.pubdriver.R.id.bookingTotalTravelTime;
 import static com.oceanstyxx.pubdriver.R.id.bookingTravelTime;
 import static com.oceanstyxx.pubdriver.R.id.driverName;
@@ -90,13 +97,25 @@ public class BookingDetailsActivity extends AppCompatActivity {
     private TextView textViewMobileNumber;
     private TextView textViewLicenceNumber;
     private ImageView imageViewDriverPhoto;
+    private TextView textViewBookingTotal;
 
     BitmapWorkerTask bitmapWorkerTask;
+
+    private String driveId;
+
+    private int dimensionInPixel = 80;
+
+    BookingStatus bookingStatus;
+
+    private String strTravelTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_details);
+
+        driveId = getIntent().getExtras().getString("driveid");
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
@@ -118,6 +137,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
         textViewMobileNumber = (TextView)findViewById(R.id.mobileNumber);
         textViewLicenceNumber = (TextView)findViewById(R.id.licenceNumber);
         imageViewDriverPhoto = (ImageView)findViewById(R.id.driverPhoto);
+        textViewBookingTotal = (TextView)findViewById(R.id.bookingTotal);
 
         bitmapWorkerTask = new BitmapWorkerTask(imageViewDriverPhoto);
 
@@ -129,10 +149,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
         mTableLayout.setStretchAllColumns(true);
 
         loadBookingStatusTask = new LoadBookingStatusTask();
-        String driverId = "4"; //session.getDriverId();
-        loadBookingStatusTask.execute(driverId);
-
-        loadData();
+        loadBookingStatusTask.execute(driveId);
     }
 
 
@@ -174,26 +191,41 @@ public class BookingDetailsActivity extends AppCompatActivity {
 
                 for (int i=0; i<jsonArray.length(); i++) {
                     //JSONObject jObj = new JSONObject(jsonArray.getString(i));
-                    BookingStatus bookingStatus = new Gson().fromJson(jsonArray.getString(i), BookingStatus.class);
+                    bookingStatus = new Gson().fromJson(jsonArray.getString(i), BookingStatus.class);
 
                     textViewBookingDate.setText(bookingStatus.getBooking_date_time());
                     textViewBookingNumber.setText(bookingStatus.getDrive_code());
                     textViewBookingFromPub.setText(bookingStatus.getPub().getPub_name());
                     textViewBookingFrom.setText(bookingStatus.getPub().getAddress());
 
-                    textViewBookingTravelTime.setText("Night");
                     textViewBookingStartTime.setText(bookingStatus.getDrive_start_time());
                     textViewBookingEndTime.setText(bookingStatus.getDrive_end_time());
                     textViewBookingTotalTravelTime.setText(bookingStatus.getTotal_travel_time());
                     textViewDriverName.setText(bookingStatus.getDriver().getFirst_name()+ " "+bookingStatus.getDriver().getLast_name());
                     textViewMobileNumber.setText(bookingStatus.getDriver().getPhone_number());
                     textViewLicenceNumber.setText(bookingStatus.getDriver().getLicence_no());
+                    textViewBookingTotal.setText(bookingStatus.getTotal_drive_rate());
 
                     String profile_image = bookingStatus.getDriver().getProfile_image();
-                    String profileImageUrl = Const.IMAGE_URL+profile_image;
-                    bitmapWorkerTask.execute(profileImageUrl);
+                    int dimensionInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dimensionInPixel, getResources().getDisplayMetrics());
+                    imageViewDriverPhoto.getLayoutParams().height = dimensionInDp;
+                    imageViewDriverPhoto.getLayoutParams().width = dimensionInDp;
+                    imageViewDriverPhoto.requestLayout();
+
+                    if(profile_image == null ){
+                        imageViewDriverPhoto.setImageResource(R.drawable.avatar);
+                    }
+                    else {
+                        String profileImageUrl = Const.IMAGE_URL+profile_image;
+                        bitmapWorkerTask.execute(profileImageUrl);
+                    }
+
                 }
 
+                loadData();
+                loadTravelTime();
+
+                textViewBookingTravelTime.setText(strTravelTime);
             }
             catch(Exception e ){
                 e.printStackTrace();
@@ -273,8 +305,88 @@ public class BookingDetailsActivity extends AppCompatActivity {
         return false;
     }
 
+    public void loadTravelTime(){
+        String sTravelTime = bookingStatus.getDrive_start_time();
+        String[] splited = sTravelTime.split("\\s+");
+
+        try {
+
+            boolean isBetween7to10 = false;
+            boolean isBetween17to21 = false;
+            boolean isBetween10to17 = false;
+            boolean isBetween21to7 = false;
+
+            String string7 = "07:00:00";
+            Date time7 = new SimpleDateFormat("HH:mm:ss").parse(string7);
+            Calendar calendar7 = Calendar.getInstance();
+            calendar7.setTime(time7);
+
+            String string10 = "10:00:00";
+            Date time10 = new SimpleDateFormat("HH:mm:ss").parse(string10);
+            Calendar calendar10 = Calendar.getInstance();
+            calendar10.setTime(time10);
+
+            String string17 = "17:00:00";
+            Date time17 = new SimpleDateFormat("HH:mm:ss").parse(string17);
+            Calendar calendar17 = Calendar.getInstance();
+            calendar17.setTime(time17);
+
+            String string21 = "21:00:00";
+            Date time21 = new SimpleDateFormat("HH:mm:ss").parse(string21);
+            Calendar calendar21 = Calendar.getInstance();
+            calendar21.setTime(time21);
+
+            String string7Next = "07:00:00";
+            Date time7Next = new SimpleDateFormat("HH:mm:ss").parse(string7Next);
+            Calendar calendar7Next = Calendar.getInstance();
+            calendar7Next.setTime(time7Next);
+            calendar7Next.add(Calendar.DATE, 1);
+
+            String someRandomTime = splited[1];
+            Date d = new SimpleDateFormat("HH:mm:ss").parse(someRandomTime);
+            Calendar calendar3 = Calendar.getInstance();
+            calendar3.setTime(d);
+
+            Date x = calendar3.getTime();
+            if (x.after(calendar7.getTime()) && x.before(calendar10.getTime())) {
+                isBetween7to10 = true;
+            }
+
+            if (x.after(calendar17.getTime()) && x.before(calendar21.getTime())) {
+                isBetween17to21 = true;
+            }
+
+            if (x.after(calendar10.getTime()) && x.before(calendar17.getTime())) {
+                isBetween10to17 = true;
+            }
+
+            if (x.after(calendar21.getTime()) && x.before(calendar7Next.getTime())) {
+                isBetween21to7 = true;
+            }
+
+
+            if(isBetween7to10 || isBetween17to21){
+                strTravelTime = "Peak Hours";
+            }
+
+            if(isBetween10to17){
+                strTravelTime = "Normal Hours";
+            }
+
+            if(isBetween21to7){
+                strTravelTime = "Night Hours";
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     public void loadData() {
 
+        ArrayList<Billing> billing = bookingStatus.getBilling();
         int leftRowMargin=0;
         int topRowMargin=0;
         int rightRowMargin=0;
@@ -286,7 +398,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
         mediumTextSize = (int) getResources().getDimension(R.dimen.font_size_medium);
 
         Invoices invoices = new Invoices();
-        InvoiceData[] data = invoices.getInvoices();
+        InvoiceData[] data = invoices.getInvoices(billing);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy");
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
@@ -313,20 +425,21 @@ public class BookingDetailsActivity extends AppCompatActivity {
                     TableRow.LayoutParams.WRAP_CONTENT));
 
             tv.setGravity(Gravity.LEFT);
-
-            tv.setPadding(5, 15, 0, 15);
+            tv.setWidth(200);
+            tv.setPadding(5, 5, 5, 5);
             if (i == -1) {
                 tv.setText("CHARGE DETAILS");
-                tv.setBackgroundColor(Color.parseColor("#f0f0f0"));
+                //tv.setBackgroundColor(Color.parseColor("#f0f0f0"));
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
                 tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
 
             } else {
-                tv.setBackgroundColor(Color.parseColor("#f8f8f8"));
+                //tv.setBackgroundColor(Color.parseColor("#f8f8f8"));
                 tv.setText(row.chargeDetails);
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
                 tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
             }
+            tv.setTextColor(Color.parseColor("#000000"));
 
             final TextView tv2 = new TextView(this);
             if (i == -1) {
@@ -339,15 +452,16 @@ public class BookingDetailsActivity extends AppCompatActivity {
                 tv2.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
             }
 
-            tv2.setGravity(Gravity.LEFT);
+            tv2.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
 
-            tv2.setPadding(5, 15, 0, 15);
+            tv2.setPadding(5, 10, 5, 10);
             if (i == -1) {
                 tv2.setText("QTY");
-                tv2.setBackgroundColor(Color.parseColor("#f7f7f7"));
+                tv2.setTextColor(Color.parseColor("#000000"));
+                //tv2.setBackgroundColor(Color.parseColor("#f7f7f7"));
                 tv2.setTypeface(tv.getTypeface(), Typeface.BOLD);
             }else {
-                tv2.setBackgroundColor(Color.parseColor("#ffffff"));
+                //tv2.setBackgroundColor(Color.parseColor("#ffffff"));
                 tv2.setTextColor(Color.parseColor("#000000"));
                 tv2.setText(String.valueOf(row.qty));
                 tv2.setTypeface(tv.getTypeface(), Typeface.BOLD);
@@ -356,33 +470,34 @@ public class BookingDetailsActivity extends AppCompatActivity {
 
             final LinearLayout layCustomer = new LinearLayout(this);
             layCustomer.setOrientation(LinearLayout.VERTICAL);
-            layCustomer.setPadding(0, 10, 0, 10);
-            layCustomer.setBackgroundColor(Color.parseColor("#f8f8f8"));
+            layCustomer.setPadding(5, 5, 5, 10);
+            //layCustomer.setBackgroundColor(Color.parseColor("#f8f8f8"));
 
             final TextView tv3 = new TextView(this);
             if (i == -1) {
                 tv3.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT));
-                tv3.setPadding(5, 5, 0, 5);
+                tv3.setPadding(5, 5, 5, 5);
                 tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
                 tv3.setTypeface(tv.getTypeface(), Typeface.BOLD);
             } else {
                 tv3.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT));
-                tv3.setPadding(5, 0, 0, 5);
+                tv3.setPadding(5, 5, 5, 5);
                 tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
                 tv3.setTypeface(tv.getTypeface(), Typeface.BOLD);
             }
 
-            tv3.setGravity(Gravity.TOP);
+            tv3.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
 
 
             if (i == -1) {
                 tv3.setText("UNIT RATE");
-                tv3.setBackgroundColor(Color.parseColor("#f0f0f0"));
+                //tv3.setBackgroundColor(Color.parseColor("#f0f0f0"));
                 tv3.setTypeface(tv.getTypeface(), Typeface.BOLD);
+                tv3.setTextColor(Color.parseColor("#000000"));
             } else {
-                tv3.setBackgroundColor(Color.parseColor("#f8f8f8"));
+                //tv3.setBackgroundColor(Color.parseColor("#f8f8f8"));
                 tv3.setTextColor(Color.parseColor("#000000"));
                 tv3.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
                 tv3.setText(String.valueOf(row.unitRate));
@@ -408,7 +523,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
             final LinearLayout layAmounts = new LinearLayout(this);
             layAmounts.setOrientation(LinearLayout.VERTICAL);
             layAmounts.setGravity(Gravity.RIGHT);
-            layAmounts.setPadding(0, 10, 0, 10);
+            layAmounts.setPadding(5, 10, 5, 10);
             layAmounts.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                     TableRow.LayoutParams.MATCH_PARENT));
 
@@ -418,26 +533,27 @@ public class BookingDetailsActivity extends AppCompatActivity {
             if (i == -1) {
                 tv4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT));
-                tv4.setPadding(5, 5, 1, 5);
-                layAmounts.setBackgroundColor(Color.parseColor("#f7f7f7"));
+                tv4.setPadding(5, 5, 5, 5);
+                //layAmounts.setBackgroundColor(Color.parseColor("#f7f7f7"));
                 tv4.setTypeface(tv.getTypeface(), Typeface.BOLD);
             } else {
                 tv4.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.WRAP_CONTENT));
-                tv4.setPadding(5, 0, 1, 5);
-                layAmounts.setBackgroundColor(Color.parseColor("#ffffff"));
+                tv4.setPadding(5, 5, 5, 5);
+                //layAmounts.setBackgroundColor(Color.parseColor("#ffffff"));
                 tv4.setTypeface(tv.getTypeface(), Typeface.BOLD);
             }
 
-            tv4.setGravity(Gravity.RIGHT);
+            tv4.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
 
             if (i == -1) {
+                tv4.setTextColor(Color.parseColor("#000000"));
                 tv4.setText("TOTAL");
-                tv4.setBackgroundColor(Color.parseColor("#f7f7f7"));
+               // tv4.setBackgroundColor(Color.parseColor("#f7f7f7"));
                 tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
                 tv4.setTypeface(tv.getTypeface(), Typeface.BOLD);
             } else {
-                tv4.setBackgroundColor(Color.parseColor("#ffffff"));
+                //tv4.setBackgroundColor(Color.parseColor("#ffffff"));
                 tv4.setTextColor(Color.parseColor("#000000"));
                 tv4.setText(decimalFormat.format(row.total));
                 tv4.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
@@ -522,4 +638,5 @@ public class BookingDetailsActivity extends AppCompatActivity {
 
         }
     }
+
 }

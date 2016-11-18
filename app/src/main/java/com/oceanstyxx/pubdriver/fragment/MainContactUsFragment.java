@@ -48,6 +48,7 @@ public class MainContactUsFragment extends Fragment {
                 final View recipientsLayout = getActivity().getLayoutInflater().inflate(R.layout.message_scrollview, null);
                 final TextView recipientsTextView = (TextView) recipientsLayout.findViewById(R.id.invalid_recipients);
                 recipientsTextView.setText(R.string.call_paragraphs);
+                recipientsTextView.setTextSize(20);
                 builder.setView(recipientsLayout);
                 builder.setTitle("CALL")
                         //.setMessage("This is USAGE GUIDE dialog")
@@ -73,6 +74,7 @@ public class MainContactUsFragment extends Fragment {
                 final View recipientsLayout = getActivity().getLayoutInflater().inflate(R.layout.message_scrollview, null);
                 final TextView recipientsTextView = (TextView) recipientsLayout.findViewById(R.id.invalid_recipients);
                 recipientsTextView.setText(R.string.email_paragraphs);
+                recipientsTextView.setTextSize(20);
                 builder.setView(recipientsLayout);
                 builder.setTitle("EMAIL")
                         //.setMessage("This is USAGE GUIDE dialog")
@@ -96,6 +98,7 @@ public class MainContactUsFragment extends Fragment {
 
                 final View recipientsLayout = getActivity().getLayoutInflater().inflate(R.layout.message_scrollview, null);
                 final TextView recipientsTextView = (TextView) recipientsLayout.findViewById(R.id.invalid_recipients);
+                recipientsTextView.setTextSize(15);
                 recipientsTextView.setText(R.string.user_manual_paragraphs);
                 builder.setView(recipientsLayout);
                 builder.setTitle("USAGE GUIDE")
@@ -119,6 +122,7 @@ public class MainContactUsFragment extends Fragment {
 
                 final View recipientsLayout = getActivity().getLayoutInflater().inflate(R.layout.message_scrollview, null);
                 final TextView recipientsTextView = (TextView) recipientsLayout.findViewById(R.id.invalid_recipients);
+                recipientsTextView.setTextSize(15);
                 recipientsTextView.setText(R.string.pricing_paragraphs);
                 builder.setView(recipientsLayout);
                 builder.setTitle("PRICING")
@@ -143,6 +147,7 @@ public class MainContactUsFragment extends Fragment {
 
                 final View recipientsLayout = getActivity().getLayoutInflater().inflate(R.layout.message_scrollview, null);
                 final TextView recipientsTextView = (TextView) recipientsLayout.findViewById(R.id.invalid_recipients);
+                recipientsTextView.setTextSize(15);
                 recipientsTextView.setText(R.string.terms_and_conditions_paragraphs);
                 builder.setView(recipientsLayout);
                 builder.setTitle("TERMS AND CONDITIONS")

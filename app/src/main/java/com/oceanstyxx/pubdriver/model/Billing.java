@@ -16,6 +16,16 @@ public class Billing {
 
     private Integer total_price;
 
+    private String price_breakup;
+
+    public String getPrice_breakup() {
+        return price_breakup;
+    }
+
+    public void setPrice_breakup(String price_breakup) {
+        this.price_breakup = price_breakup;
+    }
+
     public Integer getId() {
         return id;
     }

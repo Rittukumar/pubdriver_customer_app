@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.Fragment;
@@ -34,6 +35,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -64,6 +67,10 @@ public class MainBookingListFragment extends ListFragment  {
 
     private SessionManager session;
 
+    TimerTask mTimerTask;
+    final Handler handler = new Handler();
+    Timer t = new Timer();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,6 +84,8 @@ public class MainBookingListFragment extends ListFragment  {
 
         // Session manager
         session = new SessionManager(getActivity());
+
+        doTimerTask();
 
 
         list.setOnItemClickListener(new OnItemClickListener() {
@@ -161,6 +170,7 @@ public class MainBookingListFragment extends ListFragment  {
                     for (int i=0; i<jsonArray.length(); i++) {
                         JSONObject jObjBookingStatus = new JSONObject(jsonArray.getString(i));
                         BookingRowItem bookingItem = new BookingRowItem();
+                        bookingItem.setDriveId(jObjBookingStatus.getString("id"));
                         bookingItem.setBookingNumber(jObjBookingStatus.getString("drive_code"));
 
                         String bookingStatus = jObjBookingStatus.getString("status");
@@ -174,7 +184,7 @@ public class MainBookingListFragment extends ListFragment  {
                         else if (bookingStatus.equals("Started")){
                             bookingDescription = "Your trip has been started. Enjoy the journey.";
                         }
-                        else if (bookingStatus.equals("Stoped")){
+                        else if (bookingStatus.equals("Ended")){
                             bookingDescription = "Your trip has been ended. Thank you for availing our service.";
                         }
                         else if (bookingStatus.equals("Settled")){
@@ -224,6 +234,34 @@ public class MainBookingListFragment extends ListFragment  {
             Response response = client.newCall(request).execute();
             return response.body().string();
         }
+    }
+
+    public void doTimerTask(){
+
+        mTimerTask = new TimerTask() {
+            public void run() {
+                handler.post(new Runnable() {
+                    public void run() {
+                        Log.d("TIMER", "TimerTask run");
+                        LoadBookingStatusTask loadBookingStatusTask= new LoadBookingStatusTask();
+                        loadBookingStatusTask.execute();
+                    }
+                });
+            }};
+
+        // public void schedule (TimerTask task, long delay, long period)
+        t.schedule(mTimerTask, 0, 15000);  //
+
+    }
+
+    public void stopTask(){
+
+        if(mTimerTask!=null){
+
+            Log.d("TIMER", "timer canceled");
+            mTimerTask.cancel();
+        }
+
     }
 
 }

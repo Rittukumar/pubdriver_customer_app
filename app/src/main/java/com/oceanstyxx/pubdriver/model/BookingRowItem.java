@@ -18,6 +18,16 @@ public class BookingRowItem {
 
     private String price;
 
+    private String driveId;
+
+    public String getDriveId() {
+        return driveId;
+    }
+
+    public void setDriveId(String driveId) {
+        this.driveId = driveId;
+    }
+
     public String getBookingNumber() {
         return bookingNumber;
     }

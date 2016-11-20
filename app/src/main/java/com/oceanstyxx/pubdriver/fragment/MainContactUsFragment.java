@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import static com.oceanstyxx.pubdriver.R.id.btnRequestForBooking;
 
-public class MainContactUsFragment extends Fragment {
+public class MainContactUsFragment extends Fragment implements  MainFragmentInterface {
 
     private View rootView;
     private Button btnCall;
@@ -166,5 +166,10 @@ public class MainContactUsFragment extends Fragment {
 
 
         return rootView;
+    }
+
+    @Override
+    public void fragmentBecameVisible() {
+        System.out.println("TestFragment");
     }
 }

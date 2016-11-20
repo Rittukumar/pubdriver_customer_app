@@ -19,16 +19,21 @@ import android.widget.TextView;
 
 import com.oceanstyxx.pubdriver.R;
 import com.oceanstyxx.pubdriver.adapter.MainFragmentPagerAdapter;
+import com.oceanstyxx.pubdriver.fragment.MainFragmentInterface;
 import com.oceanstyxx.pubdriver.helper.SQLiteHandler;
 import com.oceanstyxx.pubdriver.helper.SessionManager;
 
 import java.util.HashMap;
+
+import static android.R.attr.fragment;
+import static android.R.id.tabhost;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private SQLiteHandler db;
     private SessionManager session;
+    ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 
         // Get the ViewPager and set it's PagerAdapter so that it can display items
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new MainFragmentPagerAdapter(getSupportFragmentManager(),
                 MainActivity.this));
 
@@ -66,6 +71,29 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(name);
 
+        String actionType = getIntent().getStringExtra("ACTION_TYPE");
+        if(actionType != null && actionType.equals("CANCELDRIVE")) {
+            TabLayout tabhost = (TabLayout) findViewById(R.id.sliding_tabs);
+            tabhost.getTabAt(2).select();
+        }
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(final int position, final float v, final int i2) {
+            }
+
+            @Override
+            public void onPageSelected(final int position) {
+                MainFragmentInterface fragment = (MainFragmentInterface) viewPager.getAdapter().instantiateItem(viewPager, position);
+                if (fragment != null) {
+                    fragment.fragmentBecameVisible();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(final int position) {
+            }
+        });
 
     }
 

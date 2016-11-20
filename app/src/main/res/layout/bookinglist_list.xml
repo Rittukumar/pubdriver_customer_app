@@ -30,6 +30,31 @@
         />
 
     <TextView
+        android:id="@+id/bookingVenueTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorBlack"
+        android:text="Venue :"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/bookingNumberTitle"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/bookingVenue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:layout_toRightOf="@+id/bookingVenueTitle"
+        android:layout_below="@+id/bookingNumber"
+        android:textSize="15sp"
+        android:paddingLeft="8dp"
+        android:visibility="gone"
+        />
+
+    <TextView
         android:id="@+id/bookingFromTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +63,7 @@
         android:text="@string/booking_from"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:layout_below="@+id/bookingNumberTitle"
+        android:layout_below="@+id/bookingVenueTitle"
         />
 
     <TextView
@@ -47,7 +72,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorBlack"
         android:layout_toRightOf="@+id/bookingFromTitle"
-        android:layout_below="@+id/bookingNumber"
+        android:layout_below="@+id/bookingVenue"
         android:textSize="15sp"
         android:paddingLeft="8dp"
         />

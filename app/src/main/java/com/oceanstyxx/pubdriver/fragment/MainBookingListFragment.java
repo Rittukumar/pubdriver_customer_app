@@ -45,7 +45,7 @@ import okhttp3.Response;
 
 import static android.R.id.list;
 
-public class MainBookingListFragment extends ListFragment  {
+public class MainBookingListFragment extends ListFragment  implements MainFragmentInterface {
 
     private static final String TAG = MainBookingListFragment.class.getSimpleName();
 
@@ -122,6 +122,11 @@ public class MainBookingListFragment extends ListFragment  {
         LoadBookingStatusTask loadBookingStatusTask= new LoadBookingStatusTask();
         loadBookingStatusTask.execute();
 
+    }
+
+    @Override
+    public void fragmentBecameVisible() {
+        System.out.println("TestFragment");
     }
 
 
@@ -201,15 +206,19 @@ public class MainBookingListFragment extends ListFragment  {
 
 
                         String pickUpSrc = jObjBookingStatus.getString("pickup_src");
-
+                        bookingItem.setPickUpSrc(pickUpSrc);
                         if(pickUpSrc.equalsIgnoreCase("Pub")) {
                             JSONObject jObjPub = new JSONObject(jObjBookingStatus.getString("pub"));
                             String pubAddress = jObjPub.getString("address");
                             bookingItem.setBookingFrom(pubAddress);
                         }
                         else {
-                            String pickUpAddress = "test";
-                            bookingItem.setBookingFrom(pickUpAddress);
+
+                            JSONObject jObjOthervenue = new JSONObject(jObjBookingStatus.getString("othervenue"));
+                            String venue = jObjOthervenue.getString("venue");
+                            String address = jObjOthervenue.getString("address");
+                            bookingItem.setVeunue(venue);
+                            bookingItem.setBookingFrom(address);
                         }
                         rowItems.add(bookingItem);
 

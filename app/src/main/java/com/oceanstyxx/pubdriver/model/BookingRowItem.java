@@ -20,6 +20,28 @@ public class BookingRowItem {
 
     private String driveId;
 
+    private String pickUpSrc;
+
+    private String veunue;
+
+    public String getVeunue() {
+        return veunue;
+    }
+
+    public void setVeunue(String veunue) {
+        this.veunue = veunue;
+    }
+
+    public String getPickUpSrc() {
+        return pickUpSrc;
+    }
+
+    public void setPickUpSrc(String pickUpSrc) {
+        this.pickUpSrc = pickUpSrc;
+    }
+
+
+
     public String getDriveId() {
         return driveId;
     }

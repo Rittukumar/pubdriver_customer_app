@@ -36,6 +36,27 @@ public class BookingStatus {
 
     private Customer customer;
 
+    private OtherVenue othervenue;
+
+    private String pickup_src;
+
+    public OtherVenue getOthervenue() {
+        return othervenue;
+    }
+
+    public void setOthervenue(OtherVenue othervenue) {
+        this.othervenue = othervenue;
+    }
+
+    public String getPickup_src() {
+        return pickup_src;
+    }
+
+    public void setPickup_src(String pickup_src) {
+        this.pickup_src = pickup_src;
+    }
+
+
     public Integer getDriver_id() {
         return driver_id;
     }

@@ -19,7 +19,7 @@ import com.oceanstyxx.pubdriver.model.DriverRequest;
 import static com.oceanstyxx.pubdriver.R.id.btnRequestForBooking;
 import static com.oceanstyxx.pubdriver.R.id.checkBoxTermsConditions;
 
-public class MainHomeFragment extends Fragment {
+public class MainHomeFragment extends Fragment implements MainFragmentInterface {
 
     private Button btnBookDriver;
 
@@ -42,5 +42,10 @@ public class MainHomeFragment extends Fragment {
 
         return v;
 
+    }
+
+    @Override
+    public void fragmentBecameVisible() {
+        System.out.println("TestFragment");
     }
 }

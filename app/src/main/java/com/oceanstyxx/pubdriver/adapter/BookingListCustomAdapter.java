@@ -44,6 +44,7 @@ import java.util.List;
 
 import static android.R.attr.fragment;
 import static android.R.attr.targetActivity;
+import static com.oceanstyxx.pubdriver.R.id.btnViewDetails;
 
 /**
  * Created by mohsin on 11/10/16.
@@ -96,8 +97,18 @@ public class BookingListCustomAdapter extends BaseAdapter {
         TextView txtBookingDescription = (TextView) convertView.findViewById(R.id.bookingDescription);
         TextView txtBookingDate = (TextView) convertView.findViewById(R.id.bookingDate);
         TextView txtBookingPrice = (TextView) convertView.findViewById(R.id.bookingPrice);
+        TextView txtBookingVenueTitle = (TextView) convertView.findViewById(R.id.bookingVenueTitle);
+        TextView txtBookingVenue = (TextView) convertView.findViewById(R.id.bookingVenue);
+        Button btnViewDetails = (Button) convertView.findViewById(R.id.btnViewDetails);
 
         BookingRowItem row_pos = rowItem.get(position);
+
+        String pickUpSrc = row_pos.getPickUpSrc();
+        if(pickUpSrc != null && pickUpSrc.equalsIgnoreCase("Other")) {
+            txtBookingVenueTitle.setVisibility(View.VISIBLE);
+            txtBookingVenue.setVisibility(View.VISIBLE);
+            txtBookingVenue.setText(row_pos.getVeunue());
+        }
 
         String status = row_pos.getBookingStatus();
 
@@ -120,9 +131,13 @@ public class BookingListCustomAdapter extends BaseAdapter {
         else if(status.equalsIgnoreCase("Settled")) {
             txtBookingDescription.setTextColor(ContextCompat.getColor(context, R.color.request_settled));
         }
+        else if(status.equalsIgnoreCase("Requested")){
+            btnViewDetails.setVisibility(View.GONE);
+        }
+
 
         ((Activity) context).getFragmentManager();
-        Button btnViewDetails = (Button) convertView.findViewById(R.id.btnViewDetails);
+
         btnViewDetails.setTag(row_pos.getDriveId());
         btnViewDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,6 +174,7 @@ public class BookingListCustomAdapter extends BaseAdapter {
 
             }
         });
+
 
         return convertView;
 

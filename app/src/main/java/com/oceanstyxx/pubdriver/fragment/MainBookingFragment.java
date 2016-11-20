@@ -57,7 +57,7 @@ import static com.oceanstyxx.pubdriver.R.id.textViewCarTypeTitle;
 import static com.oceanstyxx.pubdriver.R.id.textViewTransmissionTitle;
 
 
-public class MainBookingFragment extends Fragment {
+public class MainBookingFragment extends Fragment implements MainFragmentInterface {
 
     private static final String TAG = MainBookingFragment.class.getSimpleName();
 
@@ -100,6 +100,15 @@ public class MainBookingFragment extends Fragment {
     Typeface Fonts;
     Typeface FontsBold;
 
+    RadioButton radioButtonManual;
+    RadioButton radioButtonAutomatic;
+
+    TextView textViewHatchBack;
+    TextView textViewSUV;
+    TextView textViewLuxury;
+    TextView textViewSedan;
+    TextView textViewMPV;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -122,6 +131,9 @@ public class MainBookingFragment extends Fragment {
         textViewCarTypeTitle.setTypeface(Fonts);
         textViewTransmissionTitle = (TextView)rootView.findViewById(R.id.textViewTransmissionTitle);
         textViewTransmissionTitle.setTypeface(Fonts);
+
+        radioButtonManual = (RadioButton) rootView.findViewById(R.id.radioButtonManual);
+        radioButtonAutomatic = (RadioButton) rootView.findViewById(R.id.radioButtonAutomatic);
 
         pubAutoComplete.setOnItemClickListener(new OnItemClickListener() {
 
@@ -152,7 +164,7 @@ public class MainBookingFragment extends Fragment {
         //paramsEmpty.addRule(RelativeLayout.RIGHT_OF, textViewSUVId1);
         layout.addView(textViewEmpty1, paramsEmpty1);
 
-        final TextView textViewSUV = new TextView(getActivity());
+        textViewSUV = new TextView(getActivity());
         int textViewSUVId = textViewEmptyId1 +1;
         textViewSUV.setId(textViewSUVId);
         textViewSUV.setText("SUV");
@@ -181,7 +193,7 @@ public class MainBookingFragment extends Fragment {
         paramsEmpty2.addRule(RelativeLayout.RIGHT_OF, textViewSUVId);
         layout.addView(textViewEmpty2, paramsEmpty2);
 
-        final TextView textViewMPV = new TextView(getActivity());
+        textViewMPV = new TextView(getActivity());
         int textViewMPVId = textViewEmptyId2 +1;
         textViewMPV.setId(textViewMPVId);
         textViewMPV.setText("MPV");
@@ -207,7 +219,7 @@ public class MainBookingFragment extends Fragment {
         paramsEmpty3.addRule(RelativeLayout.RIGHT_OF, textViewMPVId);
         layout.addView(textViewEmpty3, paramsEmpty3);
 
-        final TextView textViewSedan = new TextView(getActivity());
+        textViewSedan = new TextView(getActivity());
         int textViewSedanId = textViewEmptyId3 +1;
         textViewSedan.setId(textViewSedanId);
         textViewSedan.setText("SEDAN");
@@ -244,7 +256,7 @@ public class MainBookingFragment extends Fragment {
         paramsEmpty4.addRule(RelativeLayout.BELOW, textViewEmptyIdRow);
         layout.addView(textViewEmpty4, paramsEmpty4);
 
-        final TextView textViewHatchBack = new TextView(getActivity());
+        textViewHatchBack = new TextView(getActivity());
         int textViewHatchBackId = textViewEmptyId4 +1;
         textViewHatchBack.setId(textViewHatchBackId);
         textViewHatchBack.setText("HATCH BACK");
@@ -272,7 +284,7 @@ public class MainBookingFragment extends Fragment {
         paramsEmpty5.addRule(RelativeLayout.RIGHT_OF, textViewHatchBackId);
         layout.addView(textViewEmpty5, paramsEmpty5);
 
-        final TextView textViewLuxury = new TextView(getActivity());
+        textViewLuxury = new TextView(getActivity());
         int textViewLuxuryId = textViewEmptyId5 +1;
         textViewLuxury.setId(textViewLuxuryId);
         textViewLuxury.setText("Luxury");
@@ -502,6 +514,22 @@ public class MainBookingFragment extends Fragment {
 
     }
 
+    @Override
+    public void fragmentBecameVisible() {
+        System.out.println("TestFragment");
+        pubAutoComplete.setText("");
+        radioButtonManual.setChecked(false);
+        radioButtonAutomatic.setChecked(false);
+        checkBoxTermsConditions.setChecked(false);
+
+        selectedCarTypeId = 1;
+        textViewHatchBack.setBackgroundColor(Color.parseColor("#00bfff"));
+
+        textViewSUV.setBackgroundColor(Color.parseColor("#b3b3b3"));
+        textViewMPV.setBackgroundColor(Color.parseColor("#b3b3b3"));
+        textViewSedan.setBackgroundColor(Color.parseColor("#b3b3b3"));
+        textViewLuxury.setBackgroundColor(Color.parseColor("#b3b3b3"));
+    }
 
     public class LoadPubsTask extends AsyncTask<Void, Void, String> {
         private Exception exception;

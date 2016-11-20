@@ -15,23 +15,28 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.oceanstyxx.pubdriver.R;
 import com.oceanstyxx.pubdriver.helper.SessionManager;
 import com.oceanstyxx.pubdriver.model.Billing;
 import com.oceanstyxx.pubdriver.model.BookingStatus;
+import com.oceanstyxx.pubdriver.model.Driver;
 import com.oceanstyxx.pubdriver.model.InvoiceData;
 import com.oceanstyxx.pubdriver.model.Invoices;
+import com.oceanstyxx.pubdriver.model.OtherVenue;
 import com.oceanstyxx.pubdriver.utils.Const;
 import com.oceanstyxx.pubdriver.utils.Utility;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -55,6 +60,7 @@ import java.util.Date;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.internal.Util;
 
@@ -67,7 +73,10 @@ import static com.oceanstyxx.pubdriver.R.id.bookingStatus;
 import static com.oceanstyxx.pubdriver.R.id.bookingTotal;
 import static com.oceanstyxx.pubdriver.R.id.bookingTotalTravelTime;
 import static com.oceanstyxx.pubdriver.R.id.bookingTravelTime;
+import static com.oceanstyxx.pubdriver.R.id.btnLogin;
+import static com.oceanstyxx.pubdriver.R.id.checkBoxRemember;
 import static com.oceanstyxx.pubdriver.R.id.driverName;
+import static com.oceanstyxx.pubdriver.R.id.email;
 import static com.oceanstyxx.pubdriver.R.id.licenceNumber;
 import static com.oceanstyxx.pubdriver.R.id.mobileNumber;
 
@@ -98,6 +107,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
     private TextView textViewLicenceNumber;
     private ImageView imageViewDriverPhoto;
     private TextView textViewBookingTotal;
+    private Button btnCancelDrive;
 
     BitmapWorkerTask bitmapWorkerTask;
 
@@ -123,7 +133,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
 
         client = new OkHttpClient();
         JSON = MediaType.parse("application/json; charset=utf-8");
-
+        btnCancelDrive = (Button) findViewById(R.id.btnCancelDrive);
         textViewBookingDate = (TextView)findViewById(R.id.bookingDate);
         textViewBookingNumber = (TextView)findViewById(R.id.bookingNumber);
         textViewBookingFromPub = (TextView)findViewById(R.id.bookingFromPub);
@@ -150,8 +160,98 @@ public class BookingDetailsActivity extends AppCompatActivity {
 
         loadBookingStatusTask = new LoadBookingStatusTask();
         loadBookingStatusTask.execute(driveId);
+
+        btnCancelDrive.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                String[] myTaskParams = { driveId };
+                CancelDrivePostTask task = new CancelDrivePostTask();
+                task.execute(myTaskParams);
+            }
+
+        });
     }
 
+
+    public class CancelDrivePostTask extends AsyncTask<String, String, String> {
+        private Exception exception;
+        ProgressDialog progDailog;
+
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            progDailog = new ProgressDialog(BookingDetailsActivity.this);
+            progDailog.setMessage("Cancelling the drive...");
+            progDailog.setIndeterminate(false);
+            progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progDailog.setCancelable(true);
+            progDailog.show();
+        }
+
+        protected String doInBackground(String... params) {
+            try {
+
+                String drive_id = params[0];
+
+                JSONObject json = new JSONObject();
+                JSONObject manJson = new JSONObject();
+                manJson.put("drive_id", drive_id);
+                json.put("data",manJson);
+
+                String getResponse = post(Const.BASE_URL+"customer/cancelBookingRequest", json.toString());
+                return getResponse;
+            } catch (Exception e) {
+                this.exception = e;
+                return null;
+            }
+        }
+
+        protected void onPostExecute(String getResponse) {
+
+            if (progDailog.isShowing()) {
+                progDailog.dismiss();
+            }
+
+            try {
+                JSONObject jObj = new JSONObject(getResponse);
+
+                String code = jObj.getString("code");
+                Log.d(TAG, "Register status: " + code);
+                //boolean error = jObj.getBoolean("error");
+                if (code.equals("200") ) {
+
+                    // Launch login activity
+                    Intent i = new Intent(getApplicationContext(),
+                            MainActivity.class);
+                    i.putExtra("ACTION_TYPE", "CANCELDRIVE");
+                    startActivity(i);
+                    finish();
+                } else {
+                    // Error occurred in registration. Get the error
+                    // message
+                    String errorMsg = jObj.getString("message");
+                    Toast.makeText(getApplicationContext(),
+                            errorMsg, Toast.LENGTH_LONG).show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        private String post(String url, String json) throws IOException {
+
+            Log.w("pubdriver", "json request "+json);
+
+            RequestBody body = RequestBody.create(JSON, json);
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .build();
+            Response response = client.newCall(request).execute();
+            return response.body().string();
+        }
+    }
 
 
     public class LoadBookingStatusTask extends AsyncTask<String, Void, String> {
@@ -193,20 +293,37 @@ public class BookingDetailsActivity extends AppCompatActivity {
                     //JSONObject jObj = new JSONObject(jsonArray.getString(i));
                     bookingStatus = new Gson().fromJson(jsonArray.getString(i), BookingStatus.class);
 
+                    String status = bookingStatus.getStatus();
+
+                    if(status.equals("Assigned") && status.equals("Requested")){
+                        btnCancelDrive.setVisibility(View.VISIBLE);
+                    }
                     textViewBookingDate.setText(bookingStatus.getBooking_date_time());
                     textViewBookingNumber.setText(bookingStatus.getDrive_code());
-                    textViewBookingFromPub.setText(bookingStatus.getPub().getPub_name());
-                    textViewBookingFrom.setText(bookingStatus.getPub().getAddress());
+
+                    String pickUpSrc = bookingStatus.getPickup_src();
+                    if(pickUpSrc != null && pickUpSrc.equalsIgnoreCase("Other")) {
+                        OtherVenue otherVenue = bookingStatus.getOthervenue();
+                        textViewBookingFrom.setText(otherVenue.getAddress());
+                    }
+                    else {
+                        textViewBookingFromPub.setText(bookingStatus.getPub().getPub_name());
+                        textViewBookingFrom.setText(bookingStatus.getPub().getAddress());
+                    }
+
 
                     textViewBookingStartTime.setText(bookingStatus.getDrive_start_time());
                     textViewBookingEndTime.setText(bookingStatus.getDrive_end_time());
                     textViewBookingTotalTravelTime.setText(bookingStatus.getTotal_travel_time());
-                    textViewDriverName.setText(bookingStatus.getDriver().getFirst_name()+ " "+bookingStatus.getDriver().getLast_name());
-                    textViewMobileNumber.setText(bookingStatus.getDriver().getPhone_number());
-                    textViewLicenceNumber.setText(bookingStatus.getDriver().getLicence_no());
-                    textViewBookingTotal.setText(bookingStatus.getTotal_drive_rate());
+                    String profile_image = null;
+                    if(!status.equalsIgnoreCase("Requested")) {
+                        textViewDriverName.setText(bookingStatus.getDriver().getFirst_name() + " " + bookingStatus.getDriver().getLast_name());
+                        textViewMobileNumber.setText(bookingStatus.getDriver().getPhone_number());
+                        textViewLicenceNumber.setText(bookingStatus.getDriver().getLicence_no());
+                        textViewBookingTotal.setText(bookingStatus.getTotal_drive_rate());
+                        profile_image = bookingStatus.getDriver().getProfile_image();
+                    }
 
-                    String profile_image = bookingStatus.getDriver().getProfile_image();
                     int dimensionInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dimensionInPixel, getResources().getDisplayMetrics());
                     imageViewDriverPhoto.getLayoutParams().height = dimensionInDp;
                     imageViewDriverPhoto.getLayoutParams().width = dimensionInDp;

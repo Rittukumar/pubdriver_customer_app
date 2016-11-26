@@ -40,6 +40,16 @@ public class BookingStatus {
 
     private String pickup_src;
 
+    private String invoice_no;
+
+    public String getInvoice_no() {
+        return invoice_no;
+    }
+
+    public void setInvoice_no(String invoice_no) {
+        this.invoice_no = invoice_no;
+    }
+
     public OtherVenue getOthervenue() {
         return othervenue;
     }

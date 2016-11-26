@@ -107,6 +107,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
     private TextView textViewLicenceNumber;
     private ImageView imageViewDriverPhoto;
     private TextView textViewBookingTotal;
+    private TextView textViewInvoiceNumber;
     private Button btnCancelDrive;
 
     BitmapWorkerTask bitmapWorkerTask;
@@ -148,6 +149,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
         textViewLicenceNumber = (TextView)findViewById(R.id.licenceNumber);
         imageViewDriverPhoto = (ImageView)findViewById(R.id.driverPhoto);
         textViewBookingTotal = (TextView)findViewById(R.id.bookingTotal);
+        textViewInvoiceNumber = (TextView)findViewById(R.id.invoiceNumber);
 
         bitmapWorkerTask = new BitmapWorkerTask(imageViewDriverPhoto);
 
@@ -323,6 +325,8 @@ public class BookingDetailsActivity extends AppCompatActivity {
                         textViewBookingTotal.setText(bookingStatus.getTotal_drive_rate());
                         profile_image = bookingStatus.getDriver().getProfile_image();
                     }
+
+                    textViewInvoiceNumber.setText(bookingStatus.getInvoice_no());
 
                     int dimensionInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dimensionInPixel, getResources().getDisplayMetrics());
                     imageViewDriverPhoto.getLayoutParams().height = dimensionInDp;
@@ -545,7 +549,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
             tv.setWidth(200);
             tv.setPadding(5, 5, 5, 5);
             if (i == -1) {
-                tv.setText("CHARGE DETAILS");
+                tv.setText("BILL DETAILS");
                 //tv.setBackgroundColor(Color.parseColor("#f0f0f0"));
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, smallTextSize);
                 tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
@@ -609,7 +613,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
 
 
             if (i == -1) {
-                tv3.setText("UNIT RATE");
+                tv3.setText("RATE");
                 //tv3.setBackgroundColor(Color.parseColor("#f0f0f0"));
                 tv3.setTypeface(tv.getTypeface(), Typeface.BOLD);
                 tv3.setTextColor(Color.parseColor("#000000"));

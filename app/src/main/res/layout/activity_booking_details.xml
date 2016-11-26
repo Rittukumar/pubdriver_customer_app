@@ -26,7 +26,6 @@
             android:id="@+id/rl1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:padding="10dp"
             android:background="@drawable/border"
             >
@@ -109,7 +108,6 @@
         android:id="@+id/rl2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:padding="10dp"
         android:background="@drawable/border"
         >
@@ -215,7 +213,6 @@
         android:id="@+id/rl3"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:padding="10dp"
         android:background="@drawable/border"
         >
@@ -317,14 +314,46 @@
 
     </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/rl5"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@drawable/border"
+            >
+        <TextView
+            android:id="@+id/invoiceNumberTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorBlack"
+            android:text="INVOICE NUMBER"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:paddingTop="4dp"
+            />
 
-            <ScrollView
-                android:id="@+id/scrollView"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                >
-
-
+        <TextView
+            android:id="@+id/invoiceNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:layout_toRightOf="@+id/invoiceNumberTitle"
+            android:textSize="12sp"
+            android:paddingLeft="8dp"
+            android:paddingTop="4dp"
+            />
+        </RelativeLayout>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+    <LinearLayout
+        android:id="@+id/ll3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
                 <TableLayout
                     android:id="@+id/tableInvoices"
                     android:layout_width="fill_parent"
@@ -334,12 +363,10 @@
                     >
                 </TableLayout>
 
-            </ScrollView>
         <RelativeLayout
             android:id="@+id/rl4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:padding="5dp"
             android:background="@drawable/border"
             >
@@ -388,6 +415,7 @@
 
 
         </RelativeLayout>
-
+    </LinearLayout>
+    </ScrollView>
     </LinearLayout>
 </RelativeLayout>

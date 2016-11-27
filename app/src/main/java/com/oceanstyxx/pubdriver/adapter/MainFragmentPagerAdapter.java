@@ -17,7 +17,7 @@ import com.oceanstyxx.pubdriver.fragment.MainHomeFragment;
 
 public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 4;
-    private String tabTitles[] = new String[] { "HOME", "BOOKING","BOOKING LIST","CONTACT US"};
+    private String tabTitles[] = new String[] { "HOME", "BOOK","BOOKINGS","CONTACT"};
     private Context context;
 
     public MainFragmentPagerAdapter(FragmentManager fm, Context context) {

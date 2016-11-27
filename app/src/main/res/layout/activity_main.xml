@@ -14,8 +14,8 @@
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:minHeight="?attr/actionBarSize"
         android:background="@color/colorPrimaryDark"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -25,15 +25,16 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/sliding_tabs"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:tabBackground="@drawable/tab_color_selector"
             app:tabTextColor="@color/colorWhite"
             app:tabSelectedTextColor="@color/colorWhite"
-            app:tabMode="scrollable" />
+            app:tabMaxWidth="0dp"
+             />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="0px"
             android:layout_weight="1" />
     

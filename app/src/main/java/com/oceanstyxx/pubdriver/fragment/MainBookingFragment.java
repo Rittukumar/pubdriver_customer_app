@@ -51,6 +51,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static android.R.attr.fragment;
+import static android.R.attr.id;
 import static com.oceanstyxx.pubdriver.R.id.pickupaddress;
 import static com.oceanstyxx.pubdriver.R.id.pickupvenue;
 import static com.oceanstyxx.pubdriver.R.id.textViewCarTypeTitle;
@@ -114,6 +116,8 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
                              Bundle savedInstanceState) {
         rootView =inflater.inflate(R.layout.fragment_main_booking,
                 container, false);
+
+        rootView.setBackgroundColor(Color.WHITE);
 
         Fonts = Typeface.createFromAsset(getActivity().getAssets(), "Fonts/fonts.ttf");
         FontsBold = Typeface.createFromAsset(getActivity().getAssets(), "Fonts/fontsbold.ttf");
@@ -459,7 +463,6 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
 
         radioTransmissionGroup=(RadioGroup)rootView.findViewById(R.id.radioGroupTransmission);
 
-
         btnRequestForBooking=(Button)rootView.findViewById(R.id.btnRequestForBooking);
 
         btnRequestForBooking.setOnClickListener(new View.OnClickListener() {
@@ -516,9 +519,8 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
 
     @Override
     public void fragmentBecameVisible() {
-        System.out.println("TestFragment");
         pubAutoComplete.setText("");
-        radioButtonManual.setChecked(false);
+        radioButtonManual.setChecked(true);
         radioButtonAutomatic.setChecked(false);
         checkBoxTermsConditions.setChecked(false);
 

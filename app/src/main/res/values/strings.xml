@@ -18,7 +18,7 @@
     <string name="title_activity_register">RegisterActivity</string>
     <string name="pubs_spinner_prompt">Select Pubs</string>
     <string name="cartype_spinner_prompt">Select Car Type</string>
-    <string name="title_transmission">Select Transmission</string>
+    <string name="title_transmission">TRANSMISSION TYPE</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -219,6 +219,7 @@ Every minute after first hour	 4\n
     <string name="email_paragraphs">
         contactus@pubdrivers.com
     </string>
+    <string name="title_activity_change_password">ChangePasswordActivity</string>
 
 
 </resources>

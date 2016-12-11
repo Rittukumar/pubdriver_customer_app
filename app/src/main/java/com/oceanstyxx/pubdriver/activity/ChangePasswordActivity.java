@@ -1,10 +1,12 @@
 package com.oceanstyxx.pubdriver.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,13 +28,18 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.oceanstyxx.pubdriver.R.id.btnLogin;
 import static com.oceanstyxx.pubdriver.R.id.btnSignUP;
+import static com.oceanstyxx.pubdriver.R.id.email;
+import static com.oceanstyxx.pubdriver.R.id.passwordconfirm;
+import static com.oceanstyxx.pubdriver.R.id.passwordnew;
+import static com.oceanstyxx.pubdriver.R.id.passwordold;
 
-public class ForgotPasswordActivity extends AppCompatActivity {
+public class ChangePasswordActivity extends AppCompatActivity {
 
-    private EditText inputEmail;
-    private Button btnSignUP;
+    private EditText passwordold;
+    private EditText passwordnew;
+    private EditText passwordconfirm;
+    private Button btnChangePassword;
 
     OkHttpClient client;
     MediaType JSON;
@@ -41,26 +48,45 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgot_password);
+        setContentView(R.layout.activity_change_password);
+        setTitle("Change Password");
+
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         client = new OkHttpClient();
         JSON = MediaType.parse("application/json; charset=utf-8");
 
         // Session manager
         session = new SessionManager(getApplicationContext());
-        inputEmail = (EditText) findViewById(R.id.email);
-        btnSignUP = (Button) findViewById(R.id.btnSignUP);
+        passwordold = (EditText) findViewById(R.id.passwordold);
+        passwordnew = (EditText) findViewById(R.id.passwordnew);
+        passwordconfirm = (EditText) findViewById(R.id.passwordconfirm);
+        btnChangePassword = (Button) findViewById(R.id.btnChangePassword);
 
         // Login button Click Event
-        btnSignUP.setOnClickListener(new View.OnClickListener() {
+        btnChangePassword.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                String email = inputEmail.getText().toString();
+                String passwordOldValue = passwordold.getText().toString();
+                String passwordNewValue = passwordnew.getText().toString();
+                String passwordConfirmValue = passwordconfirm.getText().toString();
 
                 // Check for empty data in the form
-                if (email.trim().length() > 0 ) {
+                if (passwordOldValue.trim().length() > 0 && passwordNewValue.trim().length() > 0 && passwordConfirmValue.trim().length() > 0) {
                     // login user
-                    forgotPassword(email);
+                    if(passwordNewValue.trim().equals(passwordConfirmValue.trim())){
+                        changePassword(passwordOldValue,passwordNewValue,passwordConfirmValue);
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(),
+                                "New password and confirm password not matching.", Toast.LENGTH_LONG)
+                                .show();
+                    }
+
                 } else {
                     // Prompt user to enter credentials
                     Toast.makeText(getApplicationContext(),
@@ -72,31 +98,37 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         });
     }
 
+
     /**
      * function to verify login details in mysql db
      * */
-    private void forgotPassword(final String email) {
-        Log.w("pubdrive"," Inside the forgotPassword - "+email);
-
-        String[] myTaskParams = { email };
-        ForgotPasswordPostTask task = new ForgotPasswordPostTask();
+    private void changePassword(final String emailOldValue,final String emailNewValue,final String emailConfirmValue) {
+        String[] myTaskParams = { emailOldValue, emailNewValue, emailConfirmValue};
+        ChangePasswordPostTask task = new ChangePasswordPostTask();
         task.execute(myTaskParams);
     }
 
-    public class ForgotPasswordPostTask extends AsyncTask<String, String, String> {
+
+    public class ChangePasswordPostTask extends AsyncTask<String, String, String> {
         private Exception exception;
 
         protected String doInBackground(String... params) {
             try {
 
-                String email = params[0];
+                Integer customerId = session.getCustomerId();
+                String passwordOldValue = params[0];
+                String passwordNewValue = params[1];
+                String passwordConfirmValue = params[2];
 
                 JSONObject json = new JSONObject();
                 JSONObject manJson = new JSONObject();
-                manJson.put("email", email);
+                manJson.put("customerid", customerId);
+                manJson.put("current_password", passwordOldValue);
+                manJson.put("new_password", passwordNewValue);
+                manJson.put("confirm_password", passwordConfirmValue);
                 json.put("data",manJson);
 
-                String getResponse = post(Const.BASE_URL+"customer/forgotpassword", json.toString());
+                String getResponse = post(Const.BASE_URL+"customer/changepassword", json.toString());
 
                 return getResponse;
             } catch (Exception e) {
@@ -117,7 +149,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     session.setLogin(false);
                     // Launch login activity
                     Intent i = new Intent(getApplicationContext(),
-                            LoginActivity.class);
+                            MainActivity.class);
                     startActivity(i);
                     finish();
                 } else {
@@ -145,4 +177,5 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             return response.body().string();
         }
     }
+
 }

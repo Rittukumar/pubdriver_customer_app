@@ -16,6 +16,8 @@
     <color name="request_ended">#2471A3</color>
     <color name="request_settled">#145A32</color>
     <color name="request_cancelled">#D35400</color>
+    <color name="common_border_color">#00bfff</color>
+    <color name="colorText3">#b3b3b3</color>
 
 
     <color name="bg_login">#26ae90</color>

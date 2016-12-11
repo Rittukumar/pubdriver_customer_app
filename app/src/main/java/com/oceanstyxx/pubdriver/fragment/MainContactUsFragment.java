@@ -2,6 +2,7 @@ package com.oceanstyxx.pubdriver.fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -43,23 +44,25 @@ public class MainContactUsFragment extends Fragment implements  MainFragmentInte
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 final View recipientsLayout = getActivity().getLayoutInflater().inflate(R.layout.message_scrollview, null);
                 final TextView recipientsTextView = (TextView) recipientsLayout.findViewById(R.id.invalid_recipients);
                 recipientsTextView.setText(R.string.call_paragraphs);
                 recipientsTextView.setTextSize(20);
                 builder.setView(recipientsLayout);
                 builder.setTitle("CALL")
-                        //.setMessage("This is USAGE GUIDE dialog")
                         .setCancelable(false)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                //do things
+
                             }
                         });
                 AlertDialog alert = builder.create();
-                alert.show();
+                alert.show();*/
+
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:9742411516"));
+                startActivity(callIntent);
 
             }
         });
@@ -69,7 +72,8 @@ public class MainContactUsFragment extends Fragment implements  MainFragmentInte
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
                 final View recipientsLayout = getActivity().getLayoutInflater().inflate(R.layout.message_scrollview, null);
                 final TextView recipientsTextView = (TextView) recipientsLayout.findViewById(R.id.invalid_recipients);
@@ -85,7 +89,15 @@ public class MainContactUsFragment extends Fragment implements  MainFragmentInte
                             }
                         });
                 AlertDialog alert = builder.create();
-                alert.show();
+                alert.show();*/
+
+
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("plain/text");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "contactus@pubdrivers.com" });
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Pubdrivers for Android - Feedback");
+                intent.putExtra(Intent.EXTRA_TEXT, "");
+                startActivity(Intent.createChooser(intent, ""));
 
             }
         });

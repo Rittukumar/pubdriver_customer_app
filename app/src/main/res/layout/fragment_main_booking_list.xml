@@ -9,6 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/parent">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:fillViewport="true"
+            android:scrollbars="vertical">
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
@@ -21,5 +27,27 @@
         android:layout_weight="1"
         >
     </ListView>
+        </ScrollView>
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:paddingBottom="20dp"
+            android:paddingRight="20dp"
+            >
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/myFAB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fab_plus_icon"
+                app:elevation="4dp"
+                app:backgroundTint="#00bfff"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:clickable="true"
+                />
+        </RelativeLayout>
     </FrameLayout>
 </LinearLayout>

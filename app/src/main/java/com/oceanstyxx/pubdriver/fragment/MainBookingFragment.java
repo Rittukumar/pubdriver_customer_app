@@ -3,6 +3,7 @@ package com.oceanstyxx.pubdriver.fragment;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -53,6 +54,7 @@ import okhttp3.Response;
 
 import static android.R.attr.fragment;
 import static android.R.attr.id;
+import static android.R.attr.shape;
 import static com.oceanstyxx.pubdriver.R.id.pickupaddress;
 import static com.oceanstyxx.pubdriver.R.id.pickupvenue;
 import static com.oceanstyxx.pubdriver.R.id.textViewCarTypeTitle;
@@ -72,6 +74,7 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
     private Pub selectedPub;
     private PubAdapter pubAdapter;
     AutoCompleteTextView pubAutoComplete;
+
 
     /*private Spinner carTypeSpinner;
     private CarTypeSpinAdapter carTypeSpinAdapter;
@@ -118,9 +121,8 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
                 container, false);
 
         rootView.setBackgroundColor(Color.WHITE);
-
-        Fonts = Typeface.createFromAsset(getActivity().getAssets(), "Fonts/fonts.ttf");
-        FontsBold = Typeface.createFromAsset(getActivity().getAssets(), "Fonts/fontsbold.ttf");
+        Fonts = Typeface.createFromAsset(getActivity().getAssets(), "Fonts/RobotoCondensed-Regular.ttf");
+        FontsBold = Typeface.createFromAsset(getActivity().getAssets(), "Fonts/RobotoCondensed-Bold.ttf");
 
         client = new OkHttpClient();
         JSON = MediaType.parse("application/json; charset=utf-8");
@@ -138,6 +140,12 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
 
         radioButtonManual = (RadioButton) rootView.findViewById(R.id.radioButtonManual);
         radioButtonAutomatic = (RadioButton) rootView.findViewById(R.id.radioButtonAutomatic);
+
+        checkBoxTermsConditions=(CheckBox)rootView.findViewById(R.id.checkBoxTermsConditions);
+        radioTransmissionGroup=(RadioGroup)rootView.findViewById(R.id.radioGroupTransmission);
+        btnRequestForBooking=(Button)rootView.findViewById(R.id.btnRequestForBooking);
+        ((RadioButton)radioTransmissionGroup.getChildAt(0)).setChecked(true);
+        radioButtonManual.setChecked(true);
 
         pubAutoComplete.setOnItemClickListener(new OnItemClickListener() {
 
@@ -161,15 +169,84 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
         int textViewEmptyId1 = 0;
         textViewEmptyId1 = textViewEmptyId1 +1;
         textViewEmpty1.setId(textViewEmptyId1);
-        textViewEmpty1.setPadding(30,30,30,30);
+        textViewEmpty1.setPadding(20,20,20,20);
         final RelativeLayout.LayoutParams paramsEmpty1 =
                 new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                         RelativeLayout.LayoutParams.WRAP_CONTENT);
         //paramsEmpty.addRule(RelativeLayout.RIGHT_OF, textViewSUVId1);
         layout.addView(textViewEmpty1, paramsEmpty1);
 
+
+        textViewHatchBack = new TextView(getActivity());
+        int textViewHatchBackId = textViewEmptyId1 +1;
+        textViewHatchBack.setId(textViewHatchBackId);
+        textViewHatchBack.setText("HATCH BACK");
+        textViewHatchBack.setBackgroundColor(Color.parseColor("#00bfff"));
+        textViewHatchBack.setTextSize(15);
+        textViewHatchBack.setTextColor(Color.WHITE);
+        textViewHatchBack.setTypeface(Typeface.DEFAULT_BOLD);
+        textViewHatchBack.setPadding(60,15,60,15);
+        LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(10, 10, 10, 10);
+        textViewHatchBack.setLayoutParams(layoutParams);
+
+        final RelativeLayout.LayoutParams paramsHashBack =
+                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);
+        paramsHashBack.addRule(RelativeLayout.RIGHT_OF, textViewEmptyId1);
+        layout.addView(textViewHatchBack, paramsHashBack);
+
+
+        final TextView textViewEmpty2 = new TextView(getActivity());
+        int textViewEmptyId2 = textViewHatchBackId +1;
+        textViewEmpty2.setId(textViewEmptyId2);
+        textViewEmpty2.setPadding(20,20,20,20);
+        final RelativeLayout.LayoutParams paramsEmpty2 =
+                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);
+        paramsEmpty2.addRule(RelativeLayout.RIGHT_OF, textViewHatchBackId);
+        layout.addView(textViewEmpty2, paramsEmpty2);
+
+        textViewLuxury = new TextView(getActivity());
+        int textViewLuxuryId = textViewEmptyId2 +1;
+        textViewLuxury.setId(textViewLuxuryId);
+        textViewLuxury.setText("LUXURY");
+        textViewLuxury.setBackgroundColor(Color.parseColor("#b3b3b3"));
+        textViewLuxury.setTextSize(15);
+        textViewLuxury.setTextColor(Color.WHITE);
+        textViewLuxury.setTypeface(Typeface.DEFAULT_BOLD);
+        textViewLuxury.setPadding(70,15,70,15);
+        textViewLuxury.setLayoutParams(layoutParams);
+        final RelativeLayout.LayoutParams paramsLuxury =
+                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);
+        paramsLuxury.addRule(RelativeLayout.RIGHT_OF, textViewEmptyId2);
+        layout.addView(textViewLuxury, paramsLuxury);
+
+
+        final TextView textViewEmptyrow = new TextView(getActivity());
+        int textViewEmptyIdRow = 20 +1;
+        textViewEmptyrow.setId(textViewEmptyIdRow);
+        //textViewEmptyrow.setPadding(2,2,2,2);
+        final RelativeLayout.LayoutParams paramsEmptyRow =
+                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);
+        paramsEmptyRow.addRule(RelativeLayout.BELOW, textViewHatchBackId);
+        layout.addView(textViewEmptyrow, paramsEmptyRow);
+
+
+        final TextView textViewEmpty3 = new TextView(getActivity());
+        int textViewEmptyId3 = textViewLuxuryId +1;
+        textViewEmpty3.setId(textViewEmptyId3);
+        textViewEmpty3.setPadding(20,20,20,20);
+        final RelativeLayout.LayoutParams paramsEmpty3 =
+                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                        RelativeLayout.LayoutParams.WRAP_CONTENT);
+        paramsEmpty3.addRule(RelativeLayout.BELOW, textViewEmptyIdRow);
+        layout.addView(textViewEmpty3, paramsEmpty3);
+
         textViewSUV = new TextView(getActivity());
-        int textViewSUVId = textViewEmptyId1 +1;
+        int textViewSUVId = textViewEmptyId3 +1;
         textViewSUV.setId(textViewSUVId);
         textViewSUV.setText("SUV");
         textViewSUV.setBackgroundColor(Color.parseColor("#b3b3b3"));
@@ -177,28 +254,28 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
         textViewSUV.setTextColor(Color.WHITE);
         textViewSUV.setTypeface(Typeface.DEFAULT_BOLD);
         textViewSUV.setPadding(50,15,50,15);
-        LinearLayout.LayoutParams layoutParams= new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(10, 10, 10, 10);
-        textViewSUV.setLayoutParams(layoutParams);
+        LinearLayout.LayoutParams layoutParamsSUV= new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        layoutParamsSUV.setMargins(10, 10, 10, 10);
+        textViewSUV.setLayoutParams(layoutParamsSUV);
         final RelativeLayout.LayoutParams paramsSUV =
                 new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                         RelativeLayout.LayoutParams.WRAP_CONTENT);
-        paramsSUV.addRule(RelativeLayout.RIGHT_OF, textViewEmptyId1);
+        paramsSUV.addRule(RelativeLayout.RIGHT_OF, textViewEmptyId3);
+        paramsSUV.addRule(RelativeLayout.BELOW, textViewEmptyIdRow);
         layout.addView(textViewSUV, paramsSUV);
 
-
-        final TextView textViewEmpty2 = new TextView(getActivity());
-        int textViewEmptyId2 = textViewSUVId +1;
-        textViewEmpty2.setId(textViewEmptyId2);
-        textViewEmpty2.setPadding(20,20,20,20);
-        final RelativeLayout.LayoutParams paramsEmpty2 =
+        final TextView textViewEmpty4 = new TextView(getActivity());
+        int textViewEmptyId4 = textViewSUVId +1;
+        textViewEmpty4.setId(textViewEmptyId4);
+        textViewEmpty4.setPadding(20,20,20,20);
+        final RelativeLayout.LayoutParams paramsEmpty4 =
                 new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                         RelativeLayout.LayoutParams.WRAP_CONTENT);
-        paramsEmpty2.addRule(RelativeLayout.RIGHT_OF, textViewSUVId);
-        layout.addView(textViewEmpty2, paramsEmpty2);
+        paramsEmpty4.addRule(RelativeLayout.RIGHT_OF, textViewSUVId);
+        layout.addView(textViewEmpty4, paramsEmpty4);
 
         textViewMPV = new TextView(getActivity());
-        int textViewMPVId = textViewEmptyId2 +1;
+        int textViewMPVId = textViewEmptyId4 +1;
         textViewMPV.setId(textViewMPVId);
         textViewMPV.setText("MPV");
         textViewMPV.setBackgroundColor(Color.parseColor("#b3b3b3"));
@@ -210,21 +287,23 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
         final RelativeLayout.LayoutParams paramsMPV =
                 new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                         RelativeLayout.LayoutParams.WRAP_CONTENT);
-        paramsMPV.addRule(RelativeLayout.RIGHT_OF, textViewEmptyId2);
+        paramsMPV.addRule(RelativeLayout.RIGHT_OF, textViewEmptyId4);
+        paramsMPV.addRule(RelativeLayout.BELOW, textViewEmptyIdRow);
         layout.addView(textViewMPV, paramsMPV);
 
-        final TextView textViewEmpty3 = new TextView(getActivity());
-        int textViewEmptyId3 = textViewMPVId +1;
-        textViewEmpty3.setId(textViewEmptyId3);
-        textViewEmpty3.setPadding(20,20,20,20);
-        final RelativeLayout.LayoutParams paramsEmpty3 =
+
+        final TextView textViewEmpty5 = new TextView(getActivity());
+        int textViewEmptyId5 = textViewMPVId +1;
+        textViewEmpty5.setId(textViewEmptyId5);
+        textViewEmpty5.setPadding(20,20,20,20);
+        final RelativeLayout.LayoutParams paramsEmpty5 =
                 new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                         RelativeLayout.LayoutParams.WRAP_CONTENT);
-        paramsEmpty3.addRule(RelativeLayout.RIGHT_OF, textViewMPVId);
-        layout.addView(textViewEmpty3, paramsEmpty3);
+        paramsEmpty5.addRule(RelativeLayout.RIGHT_OF, textViewMPVId);
+        layout.addView(textViewEmpty5, paramsEmpty5);
 
         textViewSedan = new TextView(getActivity());
-        int textViewSedanId = textViewEmptyId3 +1;
+        int textViewSedanId = textViewEmptyId5 +1;
         textViewSedan.setId(textViewSedanId);
         textViewSedan.setText("SEDAN");
         textViewSedan.setBackgroundColor(Color.parseColor("#b3b3b3"));
@@ -236,75 +315,9 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
         final RelativeLayout.LayoutParams paramsSedan =
                 new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
                         RelativeLayout.LayoutParams.WRAP_CONTENT);
-        paramsSedan.addRule(RelativeLayout.RIGHT_OF, textViewEmptyId3);
+        paramsSedan.addRule(RelativeLayout.RIGHT_OF, textViewEmptyId5);
+        paramsSedan.addRule(RelativeLayout.BELOW, textViewEmptyIdRow);
         layout.addView(textViewSedan, paramsSedan);
-
-        final TextView textViewEmptyrow = new TextView(getActivity());
-        int textViewEmptyIdRow = 20 +1;
-        textViewEmptyrow.setId(textViewEmptyIdRow);
-        //textViewEmptyrow.setPadding(2,2,2,2);
-        final RelativeLayout.LayoutParams paramsEmptyRow =
-                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT);
-        paramsEmptyRow.addRule(RelativeLayout.BELOW, textViewSUVId);
-        layout.addView(textViewEmptyrow, paramsEmptyRow);
-
-
-        final TextView textViewEmpty4 = new TextView(getActivity());
-        int textViewEmptyId4 = textViewSedanId +1;
-        textViewEmpty4.setId(textViewEmptyId4);
-        textViewEmpty4.setPadding(20,20,40,20);
-        final RelativeLayout.LayoutParams paramsEmpty4 =
-                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT);
-        paramsEmpty4.addRule(RelativeLayout.BELOW, textViewEmptyIdRow);
-        layout.addView(textViewEmpty4, paramsEmpty4);
-
-        textViewHatchBack = new TextView(getActivity());
-        int textViewHatchBackId = textViewEmptyId4 +1;
-        textViewHatchBack.setId(textViewHatchBackId);
-        textViewHatchBack.setText("HATCH BACK");
-        textViewHatchBack.setBackgroundColor(Color.parseColor("#00bfff"));
-        textViewHatchBack.setTextSize(15);
-        textViewHatchBack.setTextColor(Color.WHITE);
-        textViewHatchBack.setTypeface(Typeface.DEFAULT_BOLD);
-        textViewHatchBack.setPadding(60,15,60,15);
-        textViewHatchBack.setLayoutParams(layoutParams);
-        final RelativeLayout.LayoutParams paramsHatchBack =
-                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT);
-        paramsHatchBack.addRule(RelativeLayout.RIGHT_OF, textViewEmptyId4);
-        paramsHatchBack.addRule(RelativeLayout.BELOW, textViewEmptyIdRow);
-        layout.addView(textViewHatchBack, paramsHatchBack);
-
-
-        final TextView textViewEmpty5 = new TextView(getActivity());
-        int textViewEmptyId5 = textViewHatchBackId +1;
-        textViewEmpty5.setId(textViewEmptyId5);
-        textViewEmpty5.setPadding(20,20,20,20);
-        final RelativeLayout.LayoutParams paramsEmpty5 =
-                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT);
-        paramsEmpty5.addRule(RelativeLayout.RIGHT_OF, textViewHatchBackId);
-        layout.addView(textViewEmpty5, paramsEmpty5);
-
-        textViewLuxury = new TextView(getActivity());
-        int textViewLuxuryId = textViewEmptyId5 +1;
-        textViewLuxury.setId(textViewLuxuryId);
-        textViewLuxury.setText("Luxury");
-        textViewLuxury.setBackgroundColor(Color.parseColor("#b3b3b3"));
-        textViewLuxury.setTextSize(15);
-        textViewLuxury.setTextColor(Color.WHITE);
-        textViewLuxury.setTypeface(Typeface.DEFAULT_BOLD);
-        textViewLuxury.setPadding(75,15,75,15);
-        textViewLuxury.setLayoutParams(layoutParams);
-        final RelativeLayout.LayoutParams paramsLuxury =
-                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT);
-        paramsLuxury.addRule(RelativeLayout.RIGHT_OF, textViewEmptyId5);
-        paramsLuxury.addRule(RelativeLayout.BELOW, textViewEmptyIdRow);
-        layout.addView(textViewLuxury, paramsLuxury);
-
 
         textViewSUV.setOnClickListener(new OnClickListener() {
             @Override
@@ -371,103 +384,21 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
             }
         });
 
-        /*Random rnd = new Random();
-        int prevTextViewId = 0;
-        for(int i = 0; i < 10; i++)
-        {
-            final TextView textView = new TextView(getActivity());
-            textView.setText("Text "+i);
-            textView.setTextColor(rnd.nextInt() | 0xff000000);
 
-            int curTextViewId = prevTextViewId + 1;
-            textView.setId(curTextViewId);
-            final RelativeLayout.LayoutParams params =
-                    new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT,
-                            RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-            params.addRule(RelativeLayout.BELOW, prevTextViewId);
-            textView.setLayoutParams(params);
-
-            prevTextViewId = curTextViewId;
-            layout.addView(textView, params);
-        }*/
-
-
-        checkBoxTermsConditions=(CheckBox)rootView.findViewById(R.id.checkBoxTermsConditions);
-
-        //pubSpinner = (Spinner) rootView.findViewById(R.id.pubs_spinner);
-        //carTypeSpinner = (Spinner) rootView.findViewById(R.id.cartype_spinner);
-
-        /*pubSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view,
-                                       int position, long id) {
-                selectedPub = pubSpinnerAdapter.getItem(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-            }
-
-        });*/
-
-        /*CarType[] carTypes = new CarType[6];
-        carTypes[0] = new CarType();
-        carTypes[0].setId(1);
-        carTypes[0].setName("SUV");
-
-        carTypes[1] = new CarType();
-        carTypes[1].setId(2);
-        carTypes[1].setName("MPV");
-
-        carTypes[2] = new CarType();
-        carTypes[2].setId(3);
-        carTypes[2].setName("SEDAN");
-
-        carTypes[3] = new CarType();
-        carTypes[3].setId(4);
-        carTypes[3].setName("HATCHBACK");
-
-        carTypes[4] = new CarType();
-        carTypes[4].setId(5);
-        carTypes[4].setName("LUXURY");
-
-        carTypes[5] = new CarType();
-        carTypes[5].setId(0);
-        carTypes[5].setName("Select Car Type");
-
-        carTypeSpinAdapter = new CarTypeSpinAdapter(getActivity(),
-                android.R.layout.simple_spinner_item,
-                carTypes);
-        carTypeSpinner = (Spinner) rootView.findViewById(R.id.cartype_spinner);
-        carTypeSpinner.setAdapter(carTypeSpinAdapter);
-        carTypeSpinner.setSelection((carTypeSpinAdapter.getCount()-1));
-
-        carTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view,
-                                       int position, long id) {
-                selectedCarType = carTypeSpinAdapter.getItem(position);
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
-            }
-
-        });*/
-
-        radioTransmissionGroup=(RadioGroup)rootView.findViewById(R.id.radioGroupTransmission);
-
-        btnRequestForBooking=(Button)rootView.findViewById(R.id.btnRequestForBooking);
 
         btnRequestForBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(pubAutoComplete.getText().toString().length() == 0){
+                    Toast.makeText(getActivity(), "Please select pub or veunue", Toast.LENGTH_LONG).show();
+                    pubAutoComplete.setError("Pub or Veunue cannot be Blank");
+                    return;
+                }
+                else if (!checkBoxTermsConditions.isChecked()){
+                    Toast.makeText(getActivity(), "Please select terms and conditions", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 int selectedId=radioTransmissionGroup.getCheckedRadioButtonId();
                 radioTransmissionButton=(RadioButton)rootView.findViewById(selectedId);
 
@@ -520,6 +451,7 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
     @Override
     public void fragmentBecameVisible() {
         pubAutoComplete.setText("");
+        ((RadioButton)radioTransmissionGroup.getChildAt(0)).setChecked(true);
         radioButtonManual.setChecked(true);
         radioButtonAutomatic.setChecked(false);
         checkBoxTermsConditions.setChecked(false);
@@ -675,7 +607,7 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
                             "Driver Request added", Toast.LENGTH_LONG).show();
 
                     TabLayout tabhost = (TabLayout) getActivity().findViewById(R.id.sliding_tabs);
-                    tabhost.getTabAt(2).select();
+                    tabhost.getTabAt(1).select();
 
                 } else {
                     //hideDialog();

@@ -1,5 +1,6 @@
 package com.oceanstyxx.pubdriver.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -35,6 +36,14 @@ public class MainActivity extends AppCompatActivity {
     private SessionManager session;
     ViewPager viewPager;
 
+    TabLayout tabLayout;
+
+    final int[] ICONS = new int[]{
+            R.drawable.book1,
+            R.drawable.history1,
+            R.drawable.contact1
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +58,11 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this));
 
         // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
-
+        tabLayout.getTabAt(0).setIcon(ICONS[0]);
+        tabLayout.getTabAt(1).setIcon(ICONS[1]);
+        tabLayout.getTabAt(2).setIcon(ICONS[2]);
 
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
@@ -69,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         String name = user.get("name");
         String email = user.get("email");
 
-        getSupportActionBar().setTitle(name);
+        getSupportActionBar().setTitle(name.toUpperCase());
 
         String actionType = getIntent().getStringExtra("ACTION_TYPE");
         if(actionType != null && actionType.equals("CANCELDRIVE")) {
@@ -98,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     /**
      * Logging out the user. Will set isLoggedIn flag to false in shared
      * preferences Clears the user data from sqlite users table
@@ -110,6 +122,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Launching the login activity
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void changePassword(){
+        Intent intent = new Intent(MainActivity.this, ChangePasswordActivity.class);
         startActivity(intent);
         finish();
     }
@@ -128,6 +146,11 @@ public class MainActivity extends AppCompatActivity {
             logoutUser();
             return true;
         }
+        else if (id == R.id.action_change_password) {
+            changePassword();
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
     }

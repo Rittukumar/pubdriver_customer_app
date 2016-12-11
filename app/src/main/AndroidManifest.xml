@@ -3,6 +3,7 @@
     package="com.oceanstyxx.pubdriver">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -32,7 +33,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.BookingDetailsActivity" />
         <activity android:name=".activity.ForgotPasswordActivity" />
-        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.LoginActivity" />
+        <activity
+            android:name=".activity.ChangePasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

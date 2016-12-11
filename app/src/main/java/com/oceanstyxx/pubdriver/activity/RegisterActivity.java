@@ -130,7 +130,7 @@ public class RegisterActivity extends AppCompatActivity {
         String tag_string_req = "req_register";
 
         pDialog.setMessage("Registering ...");
-        showDialog();
+        //showDialog();
 
         String[] myTaskParams = { name, email, password, phone};
         RegisterActivity.RegisterTask task = new RegisterActivity.RegisterTask();

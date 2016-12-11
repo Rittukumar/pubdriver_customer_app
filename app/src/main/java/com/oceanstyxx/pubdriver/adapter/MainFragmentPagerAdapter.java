@@ -16,8 +16,8 @@ import com.oceanstyxx.pubdriver.fragment.MainHomeFragment;
  */
 
 public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
-    final int PAGE_COUNT = 4;
-    private String tabTitles[] = new String[] { "HOME", "BOOK","BOOKINGS","CONTACT"};
+    final int PAGE_COUNT = 3;
+    private String tabTitles[] = new String[] { "BOOK","HISTORY","CONTACT"};
     private Context context;
 
     public MainFragmentPagerAdapter(FragmentManager fm, Context context) {
@@ -34,16 +34,16 @@ public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
 
         switch (position) {
-            case 0:
+            /*case 0:
                 MainHomeFragment  mianHomeFragmentTab= new MainHomeFragment();
-                return mianHomeFragmentTab;
-            case 1:
+                return mianHomeFragmentTab;*/
+            case 0:
                 MainBookingFragment mainBookingFragmentTab = new MainBookingFragment();
                 return mainBookingFragmentTab;
-            case 2:
+            case 1:
                 MainBookingListFragment mainBookingListFragmentTab = new MainBookingListFragment();
                 return mainBookingListFragmentTab;
-            case 3:
+            case 2:
                 MainContactUsFragment mainContactUsFragmentTab = new MainContactUsFragment();
                 return mainContactUsFragmentTab;
             default:

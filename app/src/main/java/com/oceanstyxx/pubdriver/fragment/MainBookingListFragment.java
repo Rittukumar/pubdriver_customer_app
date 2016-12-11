@@ -7,9 +7,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +30,7 @@ import com.oceanstyxx.pubdriver.model.BookingRowItem;
 import com.oceanstyxx.pubdriver.model.Pub;
 import com.oceanstyxx.pubdriver.model.RowItem;
 import com.oceanstyxx.pubdriver.utils.Const;
+import android.support.design.widget.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -79,6 +82,14 @@ public class MainBookingListFragment extends ListFragment  implements MainFragme
         View V = inflater.inflate(R.layout.fragment_main_booking_list, container, false);
         list = (ListView)V.findViewById(android.R.id.list);
 
+        FloatingActionButton myFab = (FloatingActionButton)  V.findViewById(R.id.myFAB);
+        myFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                TabLayout tabhost = (TabLayout) getActivity().findViewById(R.id.sliding_tabs);
+                tabhost.getTabAt(0).select();
+            }
+        });
+
         client = new OkHttpClient();
         JSON = MediaType.parse("application/json; charset=utf-8");
 
@@ -88,10 +99,11 @@ public class MainBookingListFragment extends ListFragment  implements MainFragme
         doTimerTask();
 
 
+
+
         list.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                // This is important bit
                 Fragment bookingDetailsFragment = new BookingDetailsFragment();
                 FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
                 transaction.addToBackStack(null);
@@ -99,7 +111,7 @@ public class MainBookingListFragment extends ListFragment  implements MainFragme
             }
         });
 
-        return inflater.inflate(R.layout.fragment_main_booking_list, container, false);
+        return V;
     }
 
     @Override
@@ -159,75 +171,72 @@ public class MainBookingListFragment extends ListFragment  implements MainFragme
 
             try {
 
-                JSONObject jObj = new JSONObject(getResponse);
+                if(getResponse != null) {
+                    JSONObject jObj = new JSONObject(getResponse);
 
-                String code = jObj.getString("code");
-                Log.d(TAG, "Register status: " + code);
-                //boolean error = jObj.getBoolean("error");
-                if (code.equals("200")) {
+                    String code = jObj.getString("code");
+                    Log.d(TAG, "Register status: " + code);
+                    //boolean error = jObj.getBoolean("error");
+                    if (code.equals("200")) {
 
-                    JSONArray jsonArray = jObj.getJSONArray("data");
+                        JSONArray jsonArray = jObj.getJSONArray("data");
 
 
-                    rowItems = new ArrayList<BookingRowItem>();
+                        rowItems = new ArrayList<BookingRowItem>();
 
-                    List<String> list = new ArrayList<String>();
-                    for (int i=0; i<jsonArray.length(); i++) {
-                        JSONObject jObjBookingStatus = new JSONObject(jsonArray.getString(i));
-                        BookingRowItem bookingItem = new BookingRowItem();
-                        bookingItem.setDriveId(jObjBookingStatus.getString("id"));
-                        bookingItem.setBookingNumber(jObjBookingStatus.getString("drive_code"));
+                        List<String> list = new ArrayList<String>();
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jObjBookingStatus = new JSONObject(jsonArray.getString(i));
+                            BookingRowItem bookingItem = new BookingRowItem();
+                            bookingItem.setDriveId(jObjBookingStatus.getString("id"));
+                            bookingItem.setBookingNumber(jObjBookingStatus.getString("drive_code"));
 
-                        String bookingStatus = jObjBookingStatus.getString("status");
-                        String bookingDescription = null;
-                        if(bookingStatus.equals("Requested")){
-                            bookingDescription = "Your Request is in progress. We will get back to you with the driver detail in some time. Thankyou.";
+                            String bookingStatus = jObjBookingStatus.getString("status");
+                            String bookingDescription = null;
+                            if (bookingStatus.equals("Requested")) {
+                                bookingDescription = "Your Request is in progress. We will get back to you with the driver detail in some time. Thankyou.";
+                            } else if (bookingStatus.equals("Assigned")) {
+                                bookingDescription = "Driver has been assigned for your request. The driver will arrive within 45 minutes. For more details please click on view detail button.";
+                            } else if (bookingStatus.equals("Started")) {
+                                bookingDescription = "Your trip has been started. Enjoy the journey.";
+                            } else if (bookingStatus.equals("Ended")) {
+                                bookingDescription = "Your trip has been ended. Thank you for availing our service.";
+                            } else if (bookingStatus.equals("Settled")) {
+                                bookingDescription = "Thank you for the payment.";
+                            }
+                            bookingItem.setDescription(bookingDescription);
+
+                            bookingItem.setBookingStatus(bookingStatus);
+                            bookingItem.setBookingDate(jObjBookingStatus.getString("booking_date_time"));
+                            String totalPrice = jObjBookingStatus.getString("total_drive_rate");
+                            if (!totalPrice.equals("null")) {
+                                bookingItem.setPrice("RS. " + totalPrice);
+                            }
+
+
+                            String pickUpSrc = jObjBookingStatus.getString("pickup_src");
+                            bookingItem.setPickUpSrc(pickUpSrc);
+                            if (pickUpSrc.equalsIgnoreCase("Pub")) {
+                                JSONObject jObjPub = new JSONObject(jObjBookingStatus.getString("pub"));
+                                String pubAddress = jObjPub.getString("address");
+                                bookingItem.setBookingFrom(pubAddress);
+                            } else {
+
+                                JSONObject jObjOthervenue = new JSONObject(jObjBookingStatus.getString("othervenue"));
+                                String venue = jObjOthervenue.getString("venue");
+                                String address = jObjOthervenue.getString("address");
+                                bookingItem.setVeunue(venue);
+                                bookingItem.setBookingFrom(address);
+                            }
+                            rowItems.add(bookingItem);
+
                         }
-                        else if (bookingStatus.equals("Assigned")){
-                            bookingDescription = "Driver has been assigned for your request. The driver will arrive within 45 minutes. For more details please click on view detail button.";
-                        }
-                        else if (bookingStatus.equals("Started")){
-                            bookingDescription = "Your trip has been started. Enjoy the journey.";
-                        }
-                        else if (bookingStatus.equals("Ended")){
-                            bookingDescription = "Your trip has been ended. Thank you for availing our service.";
-                        }
-                        else if (bookingStatus.equals("Settled")){
-                            bookingDescription = "Thank you for the payment.";
-                        }
-                        bookingItem.setDescription(bookingDescription);
 
-                        bookingItem.setBookingStatus(bookingStatus);
-                        bookingItem.setBookingDate(jObjBookingStatus.getString("booking_date_time"));
-                        String totalPrice = jObjBookingStatus.getString("total_drive_rate");
-                        if(!totalPrice.equals("null")) {
-                            bookingItem.setPrice("RS. "+totalPrice);
-                        }
+                        adapter = new BookingListCustomAdapter(getActivity(), rowItems);
+                        setListAdapter(adapter);
 
-
-                        String pickUpSrc = jObjBookingStatus.getString("pickup_src");
-                        bookingItem.setPickUpSrc(pickUpSrc);
-                        if(pickUpSrc.equalsIgnoreCase("Pub")) {
-                            JSONObject jObjPub = new JSONObject(jObjBookingStatus.getString("pub"));
-                            String pubAddress = jObjPub.getString("address");
-                            bookingItem.setBookingFrom(pubAddress);
-                        }
-                        else {
-
-                            JSONObject jObjOthervenue = new JSONObject(jObjBookingStatus.getString("othervenue"));
-                            String venue = jObjOthervenue.getString("venue");
-                            String address = jObjOthervenue.getString("address");
-                            bookingItem.setVeunue(venue);
-                            bookingItem.setBookingFrom(address);
-                        }
-                        rowItems.add(bookingItem);
-
+                        //pDialog.dismiss();
                     }
-
-                    adapter = new BookingListCustomAdapter(getActivity(), rowItems);
-                    setListAdapter(adapter);
-
-                    //pDialog.dismiss();
                 }
             }
             catch(Exception e ){

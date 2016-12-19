@@ -94,12 +94,12 @@ public class BookingListCustomAdapter extends BaseAdapter {
         TextView txtBookingNumber = (TextView) convertView.findViewById(R.id.bookingNumber);
         TextView txtBookingFrom = (TextView) convertView.findViewById(R.id.bookingFrom);
         TextView txtBookingStatus = (TextView) convertView.findViewById(R.id.bookingStatus);
-        TextView txtBookingDescription = (TextView) convertView.findViewById(R.id.bookingDescription);
+        //TextView txtBookingDescription = (TextView) convertView.findViewById(R.id.bookingDescription);
         TextView txtBookingDate = (TextView) convertView.findViewById(R.id.bookingDate);
-        TextView txtBookingPrice = (TextView) convertView.findViewById(R.id.bookingPrice);
+        //TextView txtBookingPrice = (TextView) convertView.findViewById(R.id.bookingPrice);
         TextView txtBookingVenueTitle = (TextView) convertView.findViewById(R.id.bookingVenueTitle);
         TextView txtBookingVenue = (TextView) convertView.findViewById(R.id.bookingVenue);
-        Button btnViewDetails = (Button) convertView.findViewById(R.id.btnViewDetails);
+        ImageView btnViewDetails = (ImageView) convertView.findViewById(R.id.btnViewDetails);
 
         BookingRowItem row_pos = rowItem.get(position);
 
@@ -115,21 +115,21 @@ public class BookingListCustomAdapter extends BaseAdapter {
         txtBookingNumber.setText(row_pos.getBookingNumber());
         txtBookingFrom.setText(row_pos.getBookingFrom());
         txtBookingStatus.setText(status);
-        txtBookingDescription.setText(row_pos.getDescription());
+        //txtBookingDescription.setText(row_pos.getDescription());
         txtBookingDate.setText(row_pos.getBookingDate());
-        txtBookingPrice.setText(row_pos.getPrice());
+        //txtBookingPrice.setText(row_pos.getPrice());
 
         if(status.equalsIgnoreCase("Assigned")) {
-            txtBookingDescription.setTextColor(ContextCompat.getColor(context, R.color.request_assigned));
+            txtBookingStatus.setTextColor(ContextCompat.getColor(context, R.color.request_assigned));
         }
         else if(status.equalsIgnoreCase("Started")) {
-            txtBookingDescription.setTextColor(ContextCompat.getColor(context, R.color.request_started));
+            txtBookingStatus.setTextColor(ContextCompat.getColor(context, R.color.request_started));
         }
         else if(status.equalsIgnoreCase("Ended")) {
-            txtBookingDescription.setTextColor(ContextCompat.getColor(context, R.color.request_ended));
+            txtBookingStatus.setTextColor(ContextCompat.getColor(context, R.color.request_ended));
         }
         else if(status.equalsIgnoreCase("Settled")) {
-            txtBookingDescription.setTextColor(ContextCompat.getColor(context, R.color.request_settled));
+            txtBookingStatus.setTextColor(ContextCompat.getColor(context, R.color.request_settled));
         }
         else if(status.equalsIgnoreCase("Requested")){
             btnViewDetails.setVisibility(View.GONE);

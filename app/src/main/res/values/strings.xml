@@ -23,7 +23,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_main_booking_fragment">BOOK YOUR DRIVER</string>
-    <string name="btn_request_for_booking">REQUEST FOR BOOKING</string>
+    <string name="btn_request_for_booking">BOOK NOW</string>
     <string name="title_main_booking_home_fragment">Welcome to Pub Drive</string>
 
     <string name="btn_suv">SUV</string>
@@ -47,6 +47,12 @@
     <string name="booking_total_travel_time">TOTAL TRAVEL TIME :</string>
     <string name="mobile_number">MOBILE NUMBER :</string>
     <string name="licence_number">LICENCE NUMBER :</string>
+
+    <string name="Other_Title">
+            <![CDATA[
+                Enter <B>OTHER</B> to pick other venue.
+            ]]>
+    </string>
 
     <string name="imgdesc">imgdesc</string>
     <string-array name="titles">

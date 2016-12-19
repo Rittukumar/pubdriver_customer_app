@@ -38,7 +38,7 @@
             android:hint="Enter your pickup venue"
             android:imeOptions="actionNext"
             android:maxLength="50"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="4dp"
             android:textColorHint="#BDBDBD"
             android:elevation="0dp"
             android:textColor="@android:color/black"
@@ -51,13 +51,24 @@
             android:layout_marginTop="15dp"
             />
 
+        <TextView
+            android:id="@+id/textViewOtherTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/colorBlack"
+            android:layout_below="@+id/autocomplete_pub"
+            android:paddingBottom="5dp"/>
+
         <EditText
             android:id="@+id/pickupvenue"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:hint="Other pickup venue"
-            android:layout_below="@+id/autocomplete_pub"
+            android:layout_below="@+id/textViewOtherTitle"
             android:textCursorDrawable="@drawable/color_cursor"
             android:background="@drawable/full_width_input"
             android:padding="10dp"
@@ -148,8 +159,9 @@
             android:text="MANUAL GEAR"
             android:id="@+id/radioButtonManual"
             android:checked="false"
-            android:textSize="15dp"
+            android:textSize="13dp"
             android:buttonTint="@color/colorText1"
+            android:layout_marginRight="25dp"
             />
 
         <RadioButton
@@ -158,7 +170,7 @@
             android:text="AUTOMATIC GEAR"
             android:id="@+id/radioButtonAutomatic"
             android:checked="false"
-            android:textSize="15dp"
+            android:textSize="13dp"
             android:paddingRight="25dp"
             android:buttonTint="@color/colorText1"/>
     </RadioGroup>
@@ -192,12 +204,27 @@
             android:id="@+id/checkBoxTermsConditions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="I agreed to accept the terms and conditions."
-            android:layout_centerHorizontal="true"
+            android:text="I agreed to accept "
+            android:layout_marginLeft="15dp"
             android:paddingTop="10dp"
             android:paddingBottom="15dp"
             android:layout_marginTop="15dp"
+            android:textSize="13sp"
             android:buttonTint="@color/colorText1"/>
+
+
+        <TextView
+            android:id="@+id/textViewTermsConditions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="the terms and conditions."
+            android:textSize="13sp"
+            android:textColor="@color/colorLink"
+            android:paddingTop="10dp"
+            android:paddingBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/checkBoxTermsConditions"
+            />
 
 
         <Button
@@ -206,8 +233,9 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_request_for_booking"
             android:textSize="20dp"
+            android:textColor="@color/colorWhite"
             android:textStyle="bold"
-            android:background="@drawable/my_button_bg"
+            android:background="@color/colorPrimaryDark"
             android:layout_below="@+id/checkBoxTermsConditions"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"

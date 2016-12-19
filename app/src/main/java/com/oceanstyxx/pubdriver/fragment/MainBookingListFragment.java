@@ -218,7 +218,7 @@ public class MainBookingListFragment extends ListFragment  implements MainFragme
                             bookingItem.setPickUpSrc(pickUpSrc);
                             if (pickUpSrc.equalsIgnoreCase("Pub")) {
                                 JSONObject jObjPub = new JSONObject(jObjBookingStatus.getString("pub"));
-                                String pubAddress = jObjPub.getString("address");
+                                String pubAddress = jObjPub.getString("pub_name");
                                 bookingItem.setBookingFrom(pubAddress);
                             } else {
 

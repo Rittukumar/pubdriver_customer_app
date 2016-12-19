@@ -1,6 +1,8 @@
 package com.oceanstyxx.pubdriver.fragment;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -8,6 +10,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.Html;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -101,6 +106,7 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
 
     private TextView textViewCarTypeTitle;
     private TextView textViewTransmissionTitle;
+    private TextView textViewOtherTitle;
 
     Typeface Fonts;
     Typeface FontsBold;
@@ -113,6 +119,7 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
     TextView textViewLuxury;
     TextView textViewSedan;
     TextView textViewMPV;
+    TextView textViewTermsConditions;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -142,10 +149,38 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
         radioButtonAutomatic = (RadioButton) rootView.findViewById(R.id.radioButtonAutomatic);
 
         checkBoxTermsConditions=(CheckBox)rootView.findViewById(R.id.checkBoxTermsConditions);
+        textViewTermsConditions = (TextView)rootView.findViewById(R.id.textViewTermsConditions);
         radioTransmissionGroup=(RadioGroup)rootView.findViewById(R.id.radioGroupTransmission);
         btnRequestForBooking=(Button)rootView.findViewById(R.id.btnRequestForBooking);
         ((RadioButton)radioTransmissionGroup.getChildAt(0)).setChecked(true);
         radioButtonManual.setChecked(true);
+
+        textViewOtherTitle = (TextView)rootView.findViewById(R.id.textViewOtherTitle);
+        textViewOtherTitle.setText(Html.fromHtml(getString(R.string.Other_Title)));
+
+        textViewTermsConditions.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                final View recipientsLayout = getActivity().getLayoutInflater().inflate(R.layout.message_scrollview, null);
+                final TextView recipientsTextView = (TextView) recipientsLayout.findViewById(R.id.invalid_recipients);
+                recipientsTextView.setTextSize(15);
+                recipientsTextView.setText(R.string.terms_and_conditions_paragraphs);
+                builder.setView(recipientsLayout);
+                builder.setTitle("TERMS AND CONDITIONS")
+                        //.setMessage("This is USAGE GUIDE dialog")
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //do things
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
 
         pubAutoComplete.setOnItemClickListener(new OnItemClickListener() {
 
@@ -161,6 +196,26 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
                 if(selectedId != null && selectedId == 500) {
                     pickupvenue.setVisibility(View.VISIBLE);
                     pickupaddress.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        pubAutoComplete.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                if(s.length() != 0) {
+                    pickupvenue.setVisibility(View.GONE);
+                    pickupaddress.setVisibility(View.GONE);
                 }
             }
         });

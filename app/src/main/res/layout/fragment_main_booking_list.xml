@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/tab_list_background">
+    android:background="@color/background_padding">
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -16,14 +16,14 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/tab_list_background"
+            android:background="@color/background_padding"
             android:fillViewport="true"
             android:scrollbars="vertical">
     <ListView
         android:id="@android:id/list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:divider="@color/tab_list_background"
+        android:divider="@color/background_padding"
         android:dividerHeight="10dp"
         >
     </ListView>

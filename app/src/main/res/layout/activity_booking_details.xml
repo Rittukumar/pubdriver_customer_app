@@ -13,14 +13,14 @@
          >
 
         <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/my_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            android:background="@color/colorPrimaryDark"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
         <RelativeLayout
             android:id="@+id/rl1"
@@ -368,7 +368,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:background="@drawable/border"
+            android:background="@color/tab_list_background"
             >
 
 
@@ -410,6 +410,7 @@
                 android:paddingBottom="5dp"
                 android:textStyle="bold"
                 android:paddingTop="5dp"
+                android:layout_marginRight="10dp"
                 />
 
 

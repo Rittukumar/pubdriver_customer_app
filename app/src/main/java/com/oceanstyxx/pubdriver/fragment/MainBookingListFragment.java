@@ -25,6 +25,7 @@ import com.oceanstyxx.pubdriver.R;
 import com.oceanstyxx.pubdriver.adapter.BookingListCustomAdapter;
 import com.oceanstyxx.pubdriver.adapter.CustomAdapter;
 import com.oceanstyxx.pubdriver.adapter.PubSpinAdapter;
+import com.oceanstyxx.pubdriver.helper.DateUtility;
 import com.oceanstyxx.pubdriver.helper.SessionManager;
 import com.oceanstyxx.pubdriver.model.BookingRowItem;
 import com.oceanstyxx.pubdriver.model.Pub;
@@ -207,7 +208,8 @@ public class MainBookingListFragment extends ListFragment  implements MainFragme
                             bookingItem.setDescription(bookingDescription);
 
                             bookingItem.setBookingStatus(bookingStatus);
-                            bookingItem.setBookingDate(jObjBookingStatus.getString("booking_date_time"));
+                            String bookingDate = DateUtility.formateDateFromstring("yyyy-MM-dd hh:mm:ss", "dd-MMM-yyyy", jObjBookingStatus.getString("booking_date_time"));
+                            bookingItem.setBookingDate(bookingDate);
                             String totalPrice = jObjBookingStatus.getString("total_drive_rate");
                             if (!totalPrice.equals("null")) {
                                 bookingItem.setPrice("RS. " + totalPrice);

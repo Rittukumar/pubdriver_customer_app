@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">pubdriver</string>
     <string name="title_activity_login">LoginActivity</string>
-
+    <string name="hint_email_phone">Phone Number / Email</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="hint_name">Name</string>
@@ -219,7 +219,7 @@ Every minute after first hour	 4\n
         </string>
 
     <string name="call_paragraphs">
-        9742411516,9886483946
+        9740126435
     </string>
 
     <string name="email_paragraphs">
@@ -227,5 +227,6 @@ Every minute after first hour	 4\n
     </string>
     <string name="title_activity_change_password">ChangePasswordActivity</string>
 
+    <string name="rs">`</string>
 
 </resources>

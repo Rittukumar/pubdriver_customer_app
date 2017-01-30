@@ -114,7 +114,7 @@ public class BookingListCustomAdapter extends BaseAdapter {
 
         txtBookingNumber.setText(row_pos.getBookingNumber());
         txtBookingFrom.setText(row_pos.getBookingFrom());
-        txtBookingStatus.setText(status);
+        txtBookingStatus.setText(status.toUpperCase());
         //txtBookingDescription.setText(row_pos.getDescription());
         txtBookingDate.setText(row_pos.getBookingDate());
         //txtBookingPrice.setText(row_pos.getPrice());

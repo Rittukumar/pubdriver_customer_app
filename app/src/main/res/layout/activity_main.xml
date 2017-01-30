@@ -18,8 +18,8 @@
         android:layout_height="fill_parent"
         android:layout_alignParentTop="true"
         android:minHeight="?attr/actionBarSize"
-        android:background="@color/colorPrimaryDark"
-        android:elevation="6dp"
+        android:background="@drawable/ab_gradient"
+        android:elevation="0dp"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
@@ -29,8 +29,8 @@
             app:tabMode="fixed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:elevation="6dp"
+            android:background="@drawable/ab_gradient"
+            android:elevation="0dp"
             app:tabBackground="@drawable/tab_color_selector"
             app:tabTextColor="@color/colorWhite"
             app:tabSelectedTextColor="@color/colorWhite"

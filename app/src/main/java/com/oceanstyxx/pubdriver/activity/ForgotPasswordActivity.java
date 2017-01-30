@@ -3,10 +3,15 @@ package com.oceanstyxx.pubdriver.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -43,6 +48,18 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
+        setTitle("Forgot Password");
+
+        Window window = this.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         client = new OkHttpClient();
         JSON = MediaType.parse("application/json; charset=utf-8");
 
@@ -70,6 +87,24 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                //finish();
+                onBackPressed();
+                break;
+        }
+        return true;
     }
 
     /**
@@ -115,6 +150,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 if (code.equals("200") ) {
 
                     session.setLogin(false);
+
+                    String errorMsg = "Email is sent to registor email with instructions. Please check the email.";
+                    Toast.makeText(getApplicationContext(),
+                            errorMsg, Toast.LENGTH_LONG).show();
+
                     // Launch login activity
                     Intent i = new Intent(getApplicationContext(),
                             LoginActivity.class);

@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:background="#F0F0F0">
+            android:background="@color/background_padding">
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
@@ -25,9 +25,9 @@
                 android:layout_height="match_parent"
                 android:background="@color/colorWhite"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="2dp"
                 android:paddingTop="10dp"
                 >
             <ImageView
@@ -51,10 +51,10 @@
                     android:id="@+id/textCallNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="9742411516"
+                    android:text="@string/call_paragraphs"
                     android:textColor="@color/colorText3"
                     android:textStyle="bold"
-                    android:textSize="15dp"
+                    android:textSize="18dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_below="@+id/imageView1"/>
@@ -71,7 +71,7 @@
                 android:paddingRight="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="15dp"
                 android:layout_below="@+id/textCallNumber"/>
             </RelativeLayout>
         </LinearLayout>
@@ -82,7 +82,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:background="#F0F0F0">
+            android:background="@color/background_padding">
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
@@ -90,9 +90,9 @@
                 android:layout_height="match_parent"
                 android:background="@color/colorWhite"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="2dp"
                 android:paddingTop="10dp"
                 >
                 <ImageView
@@ -119,9 +119,10 @@
                     android:text="contactus@pubdrivers.com"
                     android:textColor="@color/colorText3"
                     android:textStyle="bold"
-                    android:textSize="12dp"
+                    android:textSize="16dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
                     android:layout_below="@+id/imageViewEmail"/>
 
                 <Button
@@ -134,9 +135,9 @@
                     android:textColor="#fff"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="15dp"
                     android:layout_below="@+id/textEmailId"/>
             </RelativeLayout>
 
@@ -157,17 +158,17 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:background="#F0F0F0">
+            android:background="@color/background_padding">
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorWhite"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="2dp"
                 android:paddingTop="10dp"
                 >
                 <ImageView
@@ -191,12 +192,14 @@
                     android:id="@+id/textUsageGuideValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1. Sign up with your name, email id..."
+                    android:text="Sign up with your name,email id and phone number..."
                     android:textColor="@color/colorText3"
                     android:textStyle="bold"
                     android:textSize="12dp"
+                    android:paddingTop="5dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_below="@+id/textUsageGuide"/>
 
                 <Button
@@ -211,7 +214,7 @@
                     android:paddingRight="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="15dp"
                     android:layout_below="@+id/textUsageGuideValue"/>
             </RelativeLayout>
 
@@ -223,17 +226,17 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:background="#F0F0F0">
+            android:background="@color/background_padding">
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorWhite"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="2dp"
                 android:paddingTop="10dp"
                 >
                 <ImageView
@@ -257,12 +260,13 @@
                     android:id="@+id/textPricingValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Peak Hours Morning 07:00 AM to 10:00..."
+                    android:text="Peak Hours Morning 7AM - 10AM Evening 5PM - 9PM"
                     android:textColor="@color/colorText3"
                     android:textStyle="bold"
                     android:textSize="12dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="15dp"
                     android:layout_below="@+id/textPricing"/>
 
                 <Button
@@ -275,9 +279,9 @@
                     android:textColor="#fff"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="15dp"
                     android:layout_below="@+id/textPricingValue"/>
             </RelativeLayout>
 
@@ -297,17 +301,17 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:background="#F0F0F0">
+            android:background="@color/background_padding">
 
             <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorWhite"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
                 android:paddingTop="10dp"
                 >
                 <ImageView
@@ -331,12 +335,14 @@
                     android:id="@+id/textTermsConditionsValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="By making a booking with us, you agree to be legally bound by..."
+                    android:text="By making a booking with us, you agree to be legally bound by these terms and conditions..."
                     android:textColor="@color/colorText3"
                     android:textStyle="bold"
                     android:textSize="12dp"
+                    android:paddingTop="5dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
                     android:layout_below="@+id/textTermsConditions"/>
 
                 <Button

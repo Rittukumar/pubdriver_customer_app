@@ -68,9 +68,11 @@ public class MainActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setIcon(ICONS[0]);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        /*tabLayout.getTabAt(0).setIcon(ICONS[0]);
         tabLayout.getTabAt(1).setIcon(ICONS[1]);
-        tabLayout.getTabAt(2).setIcon(ICONS[2]);
+        tabLayout.getTabAt(2).setIcon(ICONS[2]);*/
 
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
@@ -126,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
      * */
     private void logoutUser() {
 
+        session.setLoginRemember(false);
         session.setLogin(false);
 
         db.deleteUsers();

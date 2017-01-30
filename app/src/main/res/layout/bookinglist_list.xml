@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/colorWhite"
+    android:background="@drawable/border"
     >
 
 
@@ -20,6 +20,7 @@
         android:paddingLeft="4dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:layout_marginLeft="6dp"
         />
 
     <TextView
@@ -31,30 +32,31 @@
         android:textSize="14sp"
         android:textStyle="bold"
         android:paddingTop="5dp"
-        android:paddingBottom="5dp"
+        android:paddingBottom="4dp"
         android:paddingLeft="4dp"
         />
 
     <View
         android:id="@+id/SplitLine_hor1"
         android:layout_width="match_parent"
-        android:layout_height= "2dp"
+        android:layout_height= "1dp"
         android:layout_below="@+id/bookingNumberTitle"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:background="@color/tab_list_background" />
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/colorLighterGray" />
 
     <TextView
         android:id="@+id/bookingVenueTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
         android:textColor="@color/colorBlack"
         android:text="VENUE :"
         android:paddingTop="5dp"
-        android:paddingLeft="4dp"
+        android:paddingLeft="10dp"
         android:textSize="12sp"
         android:textStyle="bold"
         android:layout_below="@+id/SplitLine_hor1"
@@ -67,7 +69,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorBlack"
         android:layout_toRightOf="@+id/bookingVenueTitle"
-        android:layout_below="@+id/bookingNumber"
+        android:layout_below="@+id/SplitLine_hor1"
         android:textSize="12sp"
         android:paddingLeft="8dp"
         android:visibility="gone"
@@ -81,9 +83,10 @@
         android:text="Venue :"
         android:textSize="12sp"
         android:textStyle="bold"
-        android:paddingTop="5dp"
+        android:paddingTop="2dp"
         android:paddingLeft="4dp"
         android:layout_below="@+id/bookingVenueTitle"
+        android:layout_marginLeft="6dp"
         />
 
     <TextView
@@ -122,6 +125,7 @@
         android:textSize="12sp"
         android:textStyle="bold"
         android:layout_below="@+id/bookingFrom"
+        android:layout_marginLeft="6dp"
         />
 
     <TextView
@@ -134,6 +138,7 @@
         android:textSize="12sp"
         android:paddingTop="5dp"
         android:paddingLeft="4dp"
+        android:textStyle="bold"
         />
 
 
@@ -148,7 +153,7 @@
         android:layout_alignParentRight="true"
         android:paddingTop="5dp"
         android:paddingLeft="4dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="10dp"
         />
 
 

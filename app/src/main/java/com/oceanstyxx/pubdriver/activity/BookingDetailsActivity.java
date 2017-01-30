@@ -8,13 +8,17 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -91,6 +95,7 @@ public class BookingDetailsActivity extends AppCompatActivity {
 
     OkHttpClient client;
     MediaType JSON;
+    Typeface face;
 
     private LoadBookingStatusTask loadBookingStatusTask = null;
 
@@ -124,11 +129,23 @@ public class BookingDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_details);
+        face = Typeface.createFromAsset(getAssets(), "Fonts/Rupee_Foradian.ttf");
+
+        Window window = this.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
 
         driveId = getIntent().getExtras().getString("driveid");
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+
+        // add back arrow to toolbar
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         session = new SessionManager(getApplicationContext());
 
@@ -149,6 +166,8 @@ public class BookingDetailsActivity extends AppCompatActivity {
         textViewLicenceNumber = (TextView)findViewById(R.id.licenceNumber);
         imageViewDriverPhoto = (ImageView)findViewById(R.id.driverPhoto);
         textViewBookingTotal = (TextView)findViewById(R.id.bookingTotal);
+        textViewBookingTotal.setTypeface(face);
+
         textViewInvoiceNumber = (TextView)findViewById(R.id.invoiceNumber);
 
         bitmapWorkerTask = new BitmapWorkerTask(imageViewDriverPhoto);
@@ -174,6 +193,16 @@ public class BookingDetailsActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     public class CancelDrivePostTask extends AsyncTask<String, String, String> {
         private Exception exception;
@@ -322,7 +351,10 @@ public class BookingDetailsActivity extends AppCompatActivity {
                         textViewDriverName.setText(bookingStatus.getDriver().getFirst_name() + " " + bookingStatus.getDriver().getLast_name());
                         textViewMobileNumber.setText(bookingStatus.getDriver().getPhone_number());
                         textViewLicenceNumber.setText(bookingStatus.getDriver().getLicence_no());
-                        textViewBookingTotal.setText(bookingStatus.getTotal_drive_rate());
+                        String totalDriveRate = bookingStatus.getTotal_drive_rate();
+                        if(totalDriveRate != null & totalDriveRate.equals("null")) {
+                            textViewBookingTotal.setText(getResources().getString(R.string.rs) + " " + bookingStatus.getTotal_drive_rate());
+                        }
                         profile_image = bookingStatus.getDriver().getProfile_image();
                     }
 

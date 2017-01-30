@@ -2,18 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/bg_login"
-    android:gravity="center"
+    android:background="@drawable/bg"
     android:orientation="vertical"
-    android:padding="10dp" >
+    android:padding="10dp"
+    android:gravity="center">
+
+
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp" >
+
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:src="@drawable/pubdrive_logo"
+            android:paddingBottom="40dp"/>
 
         <EditText
             android:id="@+id/email"
@@ -21,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@color/white"
-            android:hint="@string/hint_email"
+            android:hint="@string/hint_email_phone"
             android:inputType="textEmailAddress"
             android:padding="10dp"
             android:singleLine="true"
@@ -53,6 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Remember"
+            android:textColor="@color/white"
             android:buttonTint="@color/colorWhite"
             android:layout_gravity="left"
             />
@@ -66,6 +76,8 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="15dp"
+            android:layout_alignRight="@+id/checkBoxRemember"
+            android:paddingBottom="15dp"
             android:layout_alignParentRight="true"
             android:layout_toLeftOf="@+id/checkBoxRemember"
             />
@@ -76,9 +88,9 @@
             android:id="@+id/btnLogin"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@color/btn_login_bg"
+            android:background="@color/btn_login"
             android:text="@string/btn_login"
-            android:textColor="@color/btn_login" />
+            android:textColor="@color/white" />
 
         <!-- Link to Login Screen -->
 

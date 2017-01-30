@@ -51,6 +51,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import at.grabner.circleprogress.AnimationState;
+import at.grabner.circleprogress.AnimationStateChangedListener;
+import at.grabner.circleprogress.CircleProgressView;
+import at.grabner.circleprogress.TextMode;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -80,11 +84,13 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
     private PubAdapter pubAdapter;
     AutoCompleteTextView pubAutoComplete;
 
+    private View llCircleProgressView;
 
     /*private Spinner carTypeSpinner;
     private CarTypeSpinAdapter carTypeSpinAdapter;
     private CarType selectedCarType;*/
 
+    CircleProgressView mCircleView;
     private Button btnRequestForBooking;
     private RadioGroup radioTransmissionGroup;
     private RadioButton radioTransmissionButton;
@@ -120,6 +126,7 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
     TextView textViewSedan;
     TextView textViewMPV;
     TextView textViewTermsConditions;
+    Boolean mShowUnit = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -130,6 +137,43 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
         rootView.setBackgroundColor(Color.WHITE);
         Fonts = Typeface.createFromAsset(getActivity().getAssets(), "Fonts/RobotoCondensed-Regular.ttf");
         FontsBold = Typeface.createFromAsset(getActivity().getAssets(), "Fonts/RobotoCondensed-Bold.ttf");
+
+        llCircleProgressView = rootView.findViewById(R.id.llCircleProgressView);
+
+        mCircleView = (CircleProgressView) rootView.findViewById(R.id.circleView);
+        mCircleView.setOnProgressChangedListener(new CircleProgressView.OnProgressChangedListener() {
+            @Override
+            public void onProgressChanged(float value) {
+                Log.d(TAG, "Progress Changed: " + value);
+            }
+        });
+
+        mCircleView.setShowTextWhileSpinning(true); // Show/hide text in spinning mode
+        mCircleView.setText("Loading...");
+        mCircleView.setOnAnimationStateChangedListener(
+                new AnimationStateChangedListener() {
+                    @Override
+                    public void onAnimationStateChanged(AnimationState _animationState) {
+                        switch (_animationState) {
+                            case IDLE:
+                            case ANIMATING:
+                            case START_ANIMATING_AFTER_SPINNING:
+                                mCircleView.setTextMode(TextMode.PERCENT); // show percent if not spinning
+                                mCircleView.setUnitVisible(mShowUnit);
+                                break;
+                            case SPINNING:
+                                mCircleView.setTextMode(TextMode.TEXT); // show text while spinning
+                                mCircleView.setUnitVisible(false);
+                            case END_SPINNING:
+                                break;
+                            case END_SPINNING_START_ANIMATING:
+                                break;
+
+                        }
+                    }
+                }
+        );
+
 
         client = new OkHttpClient();
         JSON = MediaType.parse("application/json; charset=utf-8");
@@ -597,11 +641,9 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage("Please wait booking the request");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
+            llCircleProgressView.setVisibility(View.VISIBLE);
+            mCircleView.setValue(0);
+            mCircleView.spin();
         }
 
         protected String doInBackground(DriverRequest... params) {
@@ -635,6 +677,8 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
         protected void onPostExecute(String getResponse) {
             Log.d(TAG, "Driver Request Response: " + getResponse);
             try {
+                mCircleView.setValueAnimated(42);
+                llCircleProgressView.setVisibility(View.GONE);
                 JSONObject jObj = new JSONObject(getResponse);
 
                 String code = jObj.getString("code");
@@ -657,7 +701,6 @@ public class MainBookingFragment extends Fragment implements MainFragmentInterfa
                     db.addUser(name, email, phone,uid, created_at);*/
 
                     // Launch login activity
-                    pDialog.dismiss();
                     Toast.makeText(getActivity(),
                             "Driver Request added", Toast.LENGTH_LONG).show();
 

@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="primary">#2196F3</color>
+    <color name="primary_dark">#1976D2</color>
+    <color name="primary_light">#BBDEFB</color>
+    <color name="accent">#455A64</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+    <color name="colorTab">#CB4C9B</color>
     <color name="colorPrimary">#FFFFFF</color>
-    <color name="colorPrimaryDark">#4fbb73</color>
+    <color name="colorPrimaryDark">#B1489A</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
@@ -10,8 +20,8 @@
     <color name="colorText2">#990000</color>
     <color name="colorButton1">#86b300</color>
     <color name="tab_list_background">#ededed</color>
-    <color name="tab_background_selected">#4fbb73</color>
-    <color name="tab_background_unselected">#4fbb73</color>
+    <color name="tab_background_selected">#B1489A</color>
+    <color name="tab_background_unselected">#B1489A</color>
     <color name="request_assigned">#7D3C98</color>
     <color name="request_started">#A93226</color>
     <color name="request_ended">#2471A3</color>
@@ -19,8 +29,9 @@
     <color name="request_cancelled">#D35400</color>
     <color name="common_border_color">#00bfff</color>
     <color name="colorText3">#b3b3b3</color>
-
-
+    <color name="background_padding">#ebebed</color>
+    <color name="colorLightGray">#8a8a8a</color>
+    <color name="colorLighterGray">#bcbaba</color>
     <color name="bg_login">#26ae90</color>
     <color name="bg_register">#2e3237</color>
     <color name="bg_main">#428bca</color>
@@ -31,7 +42,7 @@
     <color name="input_register">#888888</color>
     <color name="input_register_bg">#3b4148</color>
     <color name="input_register_hint">#5e6266</color>
-    <color name="btn_login">#26ae90</color>
+    <color name="btn_login">#00D2FF</color>
     <color name="btn_login_bg">#eceef1</color>
     <color name="lbl_name">#333333</color>
     <color name="btn_logut_bg">#ff6861</color>
